@@ -1,0 +1,29 @@
+<h1>Listing trantypes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Desc</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @trantypes.each do |trantype| %>
+      <tr>
+        <td><%= trantype.name %></td>
+        <td><%= trantype.desc %></td>
+        <td><%= link_to 'Show', trantype %></td>
+        <td><%= link_to 'Edit', edit_trantype_path(trantype) %></td>
+        <td><%= link_to 'Destroy', trantype, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Trantype', new_trantype_path %>
