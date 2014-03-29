@@ -1,0 +1,55 @@
+<h1>Reports</h1>
+<p><%= link_to "Home", transactions_path %></p>
+
+<%= render 'form' %>
+
+<h1>Filter</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Transaction date</th>
+      <th>Transaction type</th>
+      <th>Transaction Category</th>
+      <th>Description</th>
+      <th>Supplier</th>
+      <th>Amount</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @trans.each do |transaction| %>
+      <tr>
+        <% if transaction.user_id? %>
+        <td><%= User.find(transaction.user_id).name %></td>
+        <% else %>
+        <td> Not Known </td>
+        <% end %>
+        <td><%= transaction.tran_date %></td>
+
+        <% if transaction.trantype_id? %>
+        <td><%= Trantype.find(transaction.trantype_id).name %></td>
+        <% else %>
+        <td> Not Known </td>
+        <% end %>
+
+        <% if transaction.category_id? %>
+        <td><%= Category.find(transaction.category_id).name %></td>
+        <% else %>
+        <td> Not Known </td>
+        <% end %>
+
+        <td><%= transaction.description %></td>
+        <td><%= transaction.supplier %></td>
+        <td><%= number_to_currency(transaction.amount, unit: '£') %></td>
+      </tr>
+    <% end %>
+  </tbody>
+  <td>Total spent: <%= number_to_currency(@total, unit: '£')  %></td>
+</table>
+<%= link_to 'Back', reports_path %>
+

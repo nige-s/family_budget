@@ -2,7 +2,7 @@
 
 <p>
   <strong>User:</strong>
-  <%= @transaction.user_id %>
+  <%= User.find(@transaction.user_id).name %>
 </p>
 
 <p>
@@ -12,12 +12,12 @@
 
 <p>
   <strong>Trantype:</strong>
-  <%= @transaction.trantype_id %>
+  <%= Trantype.find(@transaction.trantype_id).name %>
 </p>
 
 <p>
   <strong>Category:</strong>
-  <%= @transaction.category_id %>
+  <%= Category.find(@transaction.category_id).name %>
 </p>
 
 <p>
@@ -32,7 +32,7 @@
 
 <p>
   <strong>Amount:</strong>
-  <%= @transaction.amount %>
+  <%= number_to_currency(@transaction.amount, unit: '£') %>
 </p>
 
 <%= link_to 'Edit', edit_transaction_path(@transaction) %> |

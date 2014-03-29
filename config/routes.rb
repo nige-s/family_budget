@@ -1,11 +1,25 @@
 BudgetPlanner::Application.routes.draw do
-  resources :categories
+  resources :categories do
+    resources :transactions, only: [:index]
+  end
 
-  resources :trantypes
+  resources :trantypes do
+    resources :transactions, only: [:index]
+  end
 
-  resources :users
+  resources :users do
+    resources :transactions, only: [:index]
+  end
+  get '/transactions/reset_filter' 
+  resources :transactions 
 
-  resources :transactions
+  post '/reports/filter'
+  post '/reports/summary'
+  resources :reports
+
+
+  
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -1,12 +1,18 @@
 <h1>Listing transactions</h1>
 
+<%= link_to 'Filter Transactions',reports_filter_path, method: :post %>
+<%= link_to 'Transaction Summary',reports_summary_path, method: :post %><br>
+<%= link_to 'New Transaction', new_transaction_path %> 
+<%= link_to 'Transaction types', trantypes_path %> 
+<%= link_to 'Categories', categories_path %> 
+<%= link_to 'Users', users_path %>
 <table>
   <thead>
     <tr>
       <th>User</th>
-      <th>Tran date</th>
-      <th>Trantype</th>
-      <th>Category</th>
+      <th>Transaction date</th>
+      <th>Transaction type</th>
+      <th>Transaction Category</th>
       <th>Description</th>
       <th>Supplier</th>
       <th>Amount</th>
@@ -19,21 +25,37 @@
   <tbody>
     <% @transactions.each do |transaction| %>
       <tr>
-        <td><%= transaction.user_id %></td>
+        <% if transaction.user_id? %>
+        <td><%= link_to User.find(transaction.user_id).name, reports_filter_path("report"=>{:user => transaction.user_id}), method: :post %></td>
+        <% else %>
+        <td> Not Known </td>
+        <% end %>
         <td><%= transaction.tran_date %></td>
-        <td><%= transaction.trantype_id %></td>
-        <td><%= transaction.category_id %></td>
+
+        <% if transaction.trantype_id? %>
+        <td><%= link_to Trantype.find(transaction.trantype_id).name, reports_filter_path("report"=>{:trantype => transaction.trantype_id}), method: :post   %></td>
+        <% else %>
+        <td> Not Known </td>
+        <% end %>
+
+        <% if transaction.category_id? %>
+        <td><%= link_to Category.find(transaction.category_id).name, reports_filter_path("report"=>{:category => transaction.category_id}), method: :post   %></td>
+        <% else %>
+        <td> Not Known </td>
+        <% end %>
+
         <td><%= transaction.description %></td>
         <td><%= transaction.supplier %></td>
-        <td><%= transaction.amount %></td>
+        <td><%= number_to_currency(transaction.amount, unit: '£') %></td>
         <td><%= link_to 'Show', transaction %></td>
         <td><%= link_to 'Edit', edit_transaction_path(transaction) %></td>
         <td><%= link_to 'Destroy', transaction, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
+  <td>Total spent: <%= number_to_currency(@total, unit: '£')  %></td>
 </table>
 
 <br>
+<br>
 
-<%= link_to 'New Transaction', new_transaction_path %>

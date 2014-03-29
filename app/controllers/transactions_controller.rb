@@ -1,10 +1,13 @@
 class TransactionsController < ApplicationController
-  before_action :set_transaction, only: [:show, :edit, :update, :destroy]
+  
+   before_action :set_transaction, only: [:show, :edit, :update, :destroy]
+  
 
   # GET /transactions
   # GET /transactions.json
   def index
-    @transactions = Transaction.all
+    @transactions = Transaction.all.order('tran_date DESC')
+    @total = @transactions.sum(:amount)
   end
 
   # GET /transactions/1
