@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140329165101) do
+ActiveRecord::Schema.define(version: 20140330102508) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -21,14 +24,15 @@ ActiveRecord::Schema.define(version: 20140329165101) do
   end
 
   create_table "reports", force: true do |t|
-    t.integer  "user"
-    t.integer  "category"
-    t.integer  "trantype"
+    t.integer  "user_id"
+    t.integer  "category_id"
+    t.integer  "trantype_id"
     t.date     "sdate"
     t.date     "edate"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "range",      default: false
+    t.boolean  "range",       default: false
+    t.string   "sign",        default: "DEBIT"
   end
 
   create_table "transactions", force: true do |t|
@@ -41,6 +45,7 @@ ActiveRecord::Schema.define(version: 20140329165101) do
     t.decimal  "amount"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "sign",        default: "DEBIT"
   end
 
   create_table "trantypes", force: true do |t|

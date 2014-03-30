@@ -26,20 +26,20 @@
     <% @transactions.each do |transaction| %>
       <tr>
         <% if transaction.user_id? %>
-        <td><%= link_to User.find(transaction.user_id).name, reports_filter_path("report"=>{:user => transaction.user_id}), method: :post %></td>
+        <td><%= link_to User.find(transaction.user_id).name, reports_filter_path("report"=>{:user_id => transaction.user_id}), method: :post %></td>
         <% else %>
         <td> Not Known </td>
         <% end %>
         <td><%= transaction.tran_date %></td>
 
         <% if transaction.trantype_id? %>
-        <td><%= link_to Trantype.find(transaction.trantype_id).name, reports_filter_path("report"=>{:trantype => transaction.trantype_id}), method: :post   %></td>
+        <td><%= link_to Trantype.find(transaction.trantype_id).name, reports_filter_path("report"=>{:trantype_id => transaction.trantype_id}), method: :post   %></td>
         <% else %>
         <td> Not Known </td>
         <% end %>
 
         <% if transaction.category_id? %>
-        <td><%= link_to Category.find(transaction.category_id).name, reports_filter_path("report"=>{:category => transaction.category_id}), method: :post   %></td>
+        <td><%= link_to Category.find(transaction.category_id).name, reports_filter_path("report"=>{:category_id => transaction.category_id}), method: :post   %></td>
         <% else %>
         <td> Not Known </td>
         <% end %>
