@@ -40,11 +40,21 @@ class ReportsController < ApplicationController
 	end
 
 	def summary
+
 		@cats = Category.all
 		@summary = {}
 
-		@cats.each do |cat|
+		if params['report']
+			@report = Report.new(transaction_params)
+			@cats.each do |cat|
+			@summary[cat.name] = Transaction.where(:category_id => cat.id).where("tran_date >= ?", @report.sdate).where("tran_date <= ?", @report.edate).order('tran_date DESC').sum(:amount)
+			end
+		else
+			@report = Report.new
+			@cats.each do |cat|
 			@summary[cat.name] = Transaction.where(:category_id => cat.id).sum(:amount)
+			end
+		
 		end
 	end
 	# Never trust parameters from the scary internet, only allow the white list through.

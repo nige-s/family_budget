@@ -1,5 +1,16 @@
 <h1>Transaction Summary</h1>
 <%= link_to "Home", transactions_path %>
+
+<%= form_for @report, :url => {:action => 'summary'} do |f| %>
+<div>
+    <%= f.date_select :sdate %>
+    <div>
+      <%= f.date_select :edate %>
+  </div>
+</div>
+    <%= f.submit %>
+<% end %>
+
 <table>
   <thead>
     <tr>
