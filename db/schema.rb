@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140330102508) do
+ActiveRecord::Schema.define(version: 20140401121004) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 20140330102508) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "range",       default: false
-    t.string   "sign",        default: "DEBIT"
+    t.string   "sign"
   end
 
   create_table "transactions", force: true do |t|
@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 20140330102508) do
     t.decimal  "amount"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "sign",        default: "DEBIT"
+    t.string   "sign"
   end
 
   create_table "trantypes", force: true do |t|
