@@ -3,7 +3,7 @@ class ReportsController < ApplicationController
 	def index
 
 		if params['report']
-			filter
+			transactions_filter
 		else
 			@trans = Transaction.all
 			@report = Report.new
@@ -12,7 +12,7 @@ class ReportsController < ApplicationController
 
 	end
 
-	def filter
+	def transactions_filter
 		if params['report']
 			@report = Report.new(transaction_params)
 			@trans = Transaction.all

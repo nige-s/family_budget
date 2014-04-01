@@ -1,6 +1,6 @@
 <h1>Listing transactions</h1>
 
-<%= link_to 'Filter Transactions',reports_filter_path, method: :post %>
+<%= link_to 'Filter Transactions',transactions_filter_path, method: :post %>
 <%= link_to 'Transaction Summary',reports_summary_path, method: :post %><br>
 <%= link_to 'New Transaction', new_transaction_path %> 
 <%= link_to 'Transaction types', trantypes_path %> 
@@ -26,20 +26,20 @@
     <% @transactions.each do |transaction| %>
       <tr>
         <% if transaction.user_id? %>
-        <td><%= link_to User.find(transaction.user_id).name, reports_filter_path("report"=>{:user_id => transaction.user_id}), method: :post %></td>
+        <td><%= link_to User.find(transaction.user_id).name, transactions_filter_path("report"=>{:user_id => transaction.user_id}), method: :post %></td>
         <% else %>
         <td> Not Known </td>
         <% end %>
         <td><%= transaction.tran_date %></td>
 
         <% if transaction.trantype_id? %>
-        <td><%= link_to Trantype.find(transaction.trantype_id).name, reports_filter_path("report"=>{:trantype_id => transaction.trantype_id}), method: :post   %></td>
+        <td><%= link_to Trantype.find(transaction.trantype_id).name, transactions_filter_path("report"=>{:trantype_id => transaction.trantype_id}), method: :post   %></td>
         <% else %>
         <td> Not Known </td>
         <% end %>
 
         <% if transaction.category_id? %>
-        <td><%= link_to Category.find(transaction.category_id).name, reports_filter_path("report"=>{:category_id => transaction.category_id}), method: :post   %></td>
+        <td><%= link_to Category.find(transaction.category_id).name, transactions_filter_path("report"=>{:category_id => transaction.category_id}), method: :post   %></td>
         <% else %>
         <td> Not Known </td>
         <% end %>
