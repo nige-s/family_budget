@@ -17,6 +17,8 @@ BudgetPlanner::Application.routes.draw do
   post '/reports/summary'
   resources :reports
 
+  root to: "transactions#index"
+
 
   
 
