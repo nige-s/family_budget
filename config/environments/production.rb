@@ -1,7 +1,7 @@
 BudgetPlanner::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
-  config.action_mailer.default_url_options = { host: 'http://surteesbudget.herokuapp.com/' }
+  config.action_mailer.default_url_options = { host: 'surteesbudget.herokuapp.com' }
 
   config.assets.initialize_on_precompile = false
   # Code is not reloaded between requests.
