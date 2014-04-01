@@ -1,6 +1,9 @@
 BudgetPlanner::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  config.action_mailer.default_url_options = { host: 'http://surteesbudget.herokuapp.com/' }
+
+  config.assets.initialize_on_precompile = false
   # Code is not reloaded between requests.
   config.cache_classes = true
 
@@ -44,7 +47,7 @@ BudgetPlanner::Application.configure do
 
   # Set to :debug to see everything in the log.
   config.log_level = :info
-config.assets.compile = true
+  #config.assets.compile = true
   # Prepend all log lines with the following tags.
   # config.log_tags = [ :subdomain, :uuid ]
 

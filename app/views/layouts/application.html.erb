@@ -2,15 +2,19 @@
 <html>
 <head>
   <title>BudgetPlanner</title>
+
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-<% if flash[:notice] %>
-<p><%= flash[:notice] %></p>
+	<%= render 'layouts/user_widget' %>
+	<% if flash[:notice] %>
+	<p><%= flash[:notice] %></p>
 	<% end %>
-<%= yield %>
+	<%= yield %>
+
+	<%= render 'layouts/user_widget' %>
 
 </body>
 </html>
