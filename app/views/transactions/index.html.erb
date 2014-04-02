@@ -1,62 +1,46 @@
-<h1>Listing transactions</h1>
-
-<%= link_to 'Filter Transactions',transactions_filter_path, method: :post %>
-<%= link_to 'Transaction Summary',reports_summary_path, method: :post %><br>
-<%= link_to 'New Transaction', new_transaction_path %> 
-<%= link_to 'Transaction types', trantypes_path %> 
-<%= link_to 'Categories', categories_path %> 
-<%= link_to 'Users', users_path %>
-
-<table>
+<%- model_class = Transaction -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<%= paginate @transactions %>
+<table class="table table-striped">
   <thead>
     <tr>
-      <th>User</th>
-      <th>Transaction date</th>
-      <th>Transaction type</th>
-      <th>Transaction Category</th>
-      <th>Description</th>
-      <th>Supplier</th>
-      <th>Amount</th>
-      <th></th>
-      <th></th>
-      <th></th>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:user_id) %></th>
+      <th><%= model_class.human_attribute_name(:tran_date) %></th>
+      <th><%= model_class.human_attribute_name(:trantype_id) %></th>
+      <th><%= model_class.human_attribute_name(:category_id) %></th>
+      <th><%= model_class.human_attribute_name(:description) %></th>
+      <th><%= model_class.human_attribute_name(:supplier) %></th>
+      <th><%= model_class.human_attribute_name(:amount) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
-
   <tbody>
     <% @transactions.each do |transaction| %>
       <tr>
-        <% if transaction.user_id? %>
+        <td><%= link_to transaction.id, transaction_path(transaction) %></td>
         <td><%= link_to User.find(transaction.user_id).name, transactions_filter_path("report"=>{:user_id => transaction.user_id}), method: :post %></td>
-        <% else %>
-        <td> Not Known </td>
-        <% end %>
         <td><%= transaction.tran_date %></td>
-
-        <% if transaction.trantype_id? %>
         <td><%= link_to Trantype.find(transaction.trantype_id).name, transactions_filter_path("report"=>{:trantype_id => transaction.trantype_id}), method: :post   %></td>
-        <% else %>
-        <td> Not Known </td>
-        <% end %>
-
-        <% if transaction.category_id? %>
         <td><%= link_to Category.find(transaction.category_id).name, transactions_filter_path("report"=>{:category_id => transaction.category_id}), method: :post   %></td>
-        <% else %>
-        <td> Not Known </td>
-        <% end %>
-
         <td><%= transaction.description %></td>
         <td><%= transaction.supplier %></td>
         <td><%= number_to_currency(transaction.amount, unit: '£') %></td>
-        <td><%= link_to 'Show', transaction %></td>
-        <td><%= link_to 'Edit', edit_transaction_path(transaction) %></td>
-        <td><%= link_to 'Destroy', transaction, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_transaction_path(transaction), :class => 'btn btn-mini' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      transaction_path(transaction),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-mini btn-danger' %>
+        </td>
       </tr>
     <% end %>
   </tbody>
-  <td>Total spent: <%= number_to_currency(@total, unit: '£')  %></td>
 </table>
-<%= paginate @transactions %>
-<br>
-<br>
+<h2>Total spent: <%= number_to_currency(@total, unit: '£')  %></h2>
 
+<%= link_to t('.new', :default => t("helpers.links.new")), new_transaction_path, :class => 'btn btn-primary' %><%= paginate @transactions %>

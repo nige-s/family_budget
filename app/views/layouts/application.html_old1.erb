@@ -38,51 +38,44 @@
   </head>
   <body>
 
-    <div class="navbar navbar-fluid-top">
+    <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
-        <div class="container-fluid">
+        <div class="container">
           <a class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
           <a class="brand" href="#">BudgetPlanner</a>
-          <div class="container-fluid nav-collapse">
+          <div class="container nav-collapse">
             <ul class="nav">
-               <% if user_signed_in? %>
-              <li><%= link_to current_user.email, transactions_path %></li>
-                <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
-                <li><%= link_to 'Edit profile', edit_user_registration_path %></li>
-              <% else %>
-                <li><%= link_to "Sign up", new_user_registration_path %> </li>
-                <li><%= link_to "Login", new_user_session_path  %></li>
-             <% end %>
+              <li><%= link_to "Link1", "/path1"  %></li>
+              <li><%= link_to "Link2", "/path2"  %></li>
+              <li><%= link_to "Link3", "/path3"  %></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
       </div>
     </div>
 
-    <div class="container-fluid">
-      <div class="row-fluid">
-        <div class="span3">
-          <div class="well sidebar-nav">
-            <ul class="nav nav-list">
-              <li class="nav-header">Actions</li>
-              <li><%= link_to "All Transactions", transactions_path %></li>
-              <li><%= link_to 'Filter Transactions',transactions_filter_path, method: :post %></li>
-              <li><%= link_to 'Transaction Summary',reports_summary_path, method: :post %></li>
-              <li><%= link_to 'New Transaction', new_transaction_path %></li>
-              <li><%= link_to 'Transaction types', trantypes_path %></li>
-              <li><%= link_to 'Categories', categories_path %></li>
-            </ul>
-          </div><!--/.well -->
-        </div><!--/span-->
-        <div class="span9">
-          <%= bootstrap_flash %>
-          <%= yield %>
-        </div>
-      </div><!--/row-->
+    <div class="container">
+        <div class="row">
+          <div class="span9">
+            <%= bootstrap_flash %>
+            <%= yield %>
+          </div>
+          <div class="span3">
+            <div class="well sidebar-nav">
+              <h3>Sidebar</h3>
+              <ul class="nav nav-list">
+                <li class="nav-header">Sidebar</li>
+                <li><%= link_to "Link1", "/path1"  %></li>
+                <li><%= link_to "Link2", "/path2"  %></li>
+                <li><%= link_to "Link3", "/path3"  %></li>
+              </ul>
+            </div><!--/.well -->
+          </div><!--/span-->
+        </div><!--/row-->
 
       <footer>
         <p>&copy; Company 2014</p>
