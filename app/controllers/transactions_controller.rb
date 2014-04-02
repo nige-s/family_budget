@@ -6,7 +6,7 @@ class TransactionsController < ApplicationController
   # GET /transactions
   # GET /transactions.json
   def index
-    @transactions = Transaction.all.order('tran_date DESC')
+    @transactions = Transaction.all.order('tran_date DESC').page params[:page]
     @total = @transactions.sum(:amount)
   end
 

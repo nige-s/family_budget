@@ -56,7 +56,7 @@
   </tbody>
   <td>Total spent: <%= number_to_currency(@total, unit: '£')  %></td>
 </table>
-
+<%= paginate @transactions %>
 <br>
 <br>
 
