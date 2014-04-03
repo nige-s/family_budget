@@ -1,7 +1,10 @@
-<h1>Transaction Summary</h1>
+<%- model_class = Report -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => "Summary" %></h1>
+</div>
 <%= link_to "Home", transactions_path %>
 
-<%= form_for @report, :url => {:action => 'summary'} do |f| %>
+<%= form_for @report, :url => {:action => 'summary'}, method: :get do |f| %>
 <div>
     <%= f.date_select :sdate %>
     <div>
@@ -11,7 +14,7 @@
     <%= f.submit %>
 <% end %>
 
-<table>
+<table class = "table table-striped" >
   <thead>
     <tr>
       <th>Transaction Categories</th>

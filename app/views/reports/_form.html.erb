@@ -1,4 +1,4 @@
-<%= form_for @report, :url => {:action => 'transactions_filter'}, method: :get do |f| %>
+<%= form_for @report, method: :get do |f| %>
 
 <div>
     <%= f.collection_select(:user_id, User.all, :id, :name,:include_blank => 'Select a user') %>

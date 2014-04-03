@@ -9,18 +9,7 @@ class ReportsController < ApplicationController
   end
 
   def index
-    if params['report']
-	  transactions_filter
-	else
-	  #@trans = Transaction.all
-	  @report = Report.new
-	  @report.sdate = "01/03/2014"
-    end
-
-  end
-
-  def transactions_filter
-  	if params['report']
+if params['report']
   	  @report = Report.new(transaction_params)
       @report.sdate = Date.today - 30 if @report.sdate == nil
 	  @report.edate = Date.today if @report.edate == nil
@@ -36,7 +25,7 @@ class ReportsController < ApplicationController
 
       #@trans = Transaction.all
 	  @report = Report.new
-	  @report.sdate = "01/01/2013"
+	  @report.sdate = "01/03/2014"
 	end
 	  @@total = @trans.sum(:amount)
   end
@@ -48,10 +37,11 @@ class ReportsController < ApplicationController
 	  if params['report']
 	  	@report = Report.new(transaction_params)
 		@cats.each do |cat|
-		  @summary[cat.name] = @trans.where(:category_id => cat.id).where("tran_date >= ?", @report.sdate).where("tran_date <= ?", @report.edate).order('tran_date DESC').sum(:amount)
+		@summary[cat.name] = @trans.where(:category_id => cat.id).where("tran_date >= ?", @report.sdate).where("tran_date <= ?", @report.edate).order('tran_date DESC').sum(:amount)
 		end
 	  else
 	    @report = Report.new
+	    @report.sdate = "01/03/2014"
 		@cats.each do |cat|
 		  @summary[cat.name] = @trans.where(:category_id => cat.id).sum(:amount)
 		end

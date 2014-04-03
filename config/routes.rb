@@ -14,10 +14,9 @@ BudgetPlanner::Application.routes.draw do
   resources :users do
     resources :transactions, only: [:index]
   end
-  get '/transactions/reset_filter' 
+
   resources :transactions 
 
-  get '/reports/transactions_filter', to: "reports#transactions_filter", as: :transactions_filter #, via: [:post,:get]
   get '/reports/summary'
   resources :reports
 

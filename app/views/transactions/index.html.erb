@@ -20,10 +20,10 @@
     <% @transactions.each do |transaction| %>
       <tr>
         <td><%= link_to transaction.id, transaction_path(transaction) %></td>
-        <td><%= link_to User.find(transaction.user_id).name, transactions_filter_path("report"=>{:user_id => transaction.user_id}) %></td>
+        <td><%= link_to User.find(transaction.user_id).name, reports_path("report"=>{:user_id => transaction.user_id}) %></td>
         <td><%= transaction.tran_date.to_s(:short) %></td>
-        <td><%= link_to Trantype.find(transaction.trantype_id).name, transactions_filter_path("report"=>{:trantype_id => transaction.trantype_id}) %></td>
-        <td><%= link_to Category.find(transaction.category_id).name, transactions_filter_path("report"=>{:category_id => transaction.category_id}) %></td>
+        <td><%= link_to Trantype.find(transaction.trantype_id).name, reports_path("report"=>{:trantype_id => transaction.trantype_id}) %></td>
+        <td><%= link_to Category.find(transaction.category_id).name, reports_path("report"=>{:category_id => transaction.category_id}) %></td>
         <td><%= transaction.description %></td>
         <td><%= transaction.supplier %></td>
         <td><%= number_to_currency(transaction.amount, unit: '£') %></td>
@@ -52,5 +52,5 @@
    <% end %>
 <% end %>
 
-<%= link_to t('.new', :default => t("helpers.links.new")), new_transaction_path, :class => 'btn btn-primary' %>
+<% link_to t('.new', :default => t("helpers.links.new")), new_transaction_path, :class => 'btn btn-primary' %>
 
