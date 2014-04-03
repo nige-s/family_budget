@@ -44,5 +44,5 @@
 
 <% @total = params[:total] ||  ReportsController.total %>
 <%= paginate @trans, :params => {:total => @total} %>
-<% render 'total', :params => {:t => @total} %>
+<% render 'partials/total', :params => {:t => @total} %>
   

@@ -43,7 +43,7 @@
 
 <% @total = params[:total] ||  @total %>
 <%= paginate @transactions, :params => {:total => @total} %>
-<% render 'reports/total', :params => {:t => @total} %>
+<% render 'partials/total', :params => {:t => @total} %>
 
 <% link_to t('.new', :default => t("helpers.links.new")), new_transaction_path, :class => 'btn btn-primary' %>
 
