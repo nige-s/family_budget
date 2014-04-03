@@ -34,4 +34,6 @@
     <% end %>
   </tbody>
 </table>
-<p class='text-info' ><strong>Total spent: <%= number_to_currency(@total, unit: '£')  %></strong></p>
+<% content_for :total do %>
+   <div class = "alert alert-success"><%= "Total spent: #{number_to_currency(ReportsController.total, unit: '£')} "%></div>
+   <% end %>

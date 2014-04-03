@@ -47,11 +47,15 @@
   </tbody>
 </table>
 <% if params[:total] %>
-   <% flash[:notice] = "Total spent: #{number_to_currency(params[:total], unit: '£')} " %>
    <%= paginate @trans, :params => {total: params[:total]}%>
+   <% content_for :total do %>
+    <div class = "alert alert-success"><%= "Total spent: #{number_to_currency(params[:total], unit: '£')} " %></div>
+   <% end %>
 <% else %>
-  <% flash[:notice] = "Total spent: #{number_to_currency(ReportsController.total, unit: '£')} " %>
   <%= paginate @trans, :params => {total: ReportsController.total}%>
+  <% content_for :total do %>
+   <div class = "alert alert-success"><%= "Total spent: #{number_to_currency(ReportsController.total, unit: '£')} "  %></div>
+   <% end %>
 <% end %>
 
 <%= link_to 'Back', reports_path %>
