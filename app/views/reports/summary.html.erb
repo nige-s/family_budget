@@ -26,6 +26,7 @@
       <tr>
         <% if cat.name? %>
         <td><%= cat.name %></td>
+        <td><%= number_to_currency(@summary[cat.name], unit: '£') %></td>
         <% else %>
         <td> Not Known </td>
         <% end %>
