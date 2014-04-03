@@ -26,12 +26,11 @@
       <tr>
         <% if cat.name? %>
         <td><%= cat.name %></td>
-        <td><%= number_to_currency(@summary[cat.name], unit: '£') %></td>
         <% else %>
         <td> Not Known </td>
         <% end %>
       </tr>
     <% end %>
   </tbody>
+  <td>Total spent: <%= number_to_currency(@total, unit: '£')  %></td>
 </table>
-<p class='text-info' ><strong>Total spent: <%= number_to_currency(@total, unit: '£')  %></strong></p>
