@@ -49,7 +49,9 @@
       </tr>
     <% end %>
   </tbody>
-  <td>Total spent: <%= number_to_currency(@total, unit: '£')  %></td>
 </table>
+  <p class='text-info' >Total spent: <%= number_to_currency(@total, unit: '£')  %></p>
+
+<%= paginate @trans %>
 <%= link_to 'Back', reports_path %>
 

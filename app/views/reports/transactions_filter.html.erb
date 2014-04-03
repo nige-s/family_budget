@@ -1,7 +1,6 @@
 <h1>Filter Transactions</h1>
 <p><%= link_to "Home", transactions_path %></p>
 <%= render 'form' %>
-<h2>Total spent: <%= number_to_currency(@total, unit: '£')  %></h2>
 <table>
   <thead>
     <tr>
@@ -47,5 +46,6 @@
     <% end %>
   </tbody>
 </table>
-<h2>Total spent: <%= number_to_currency(@total, unit: '£')  %></h2>
+<p class='text-info' ><strong>Total spent: <%= number_to_currency(@total, unit: '£')  %></strong></p>
+<%= paginate @trans %>
 <%= link_to 'Back', reports_path %>
