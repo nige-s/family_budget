@@ -17,8 +17,8 @@ BudgetPlanner::Application.routes.draw do
   get '/transactions/reset_filter' 
   resources :transactions 
 
-  post '/reports/transactions_filter', to: "reports#transactions_filter", as: :transactions_filter
-  post '/reports/summary'
+  match '/reports/transactions_filter', to: "reports#transactions_filter", as: :transactions_filter, via: [:post,:get]
+  get '/reports/summary'
   resources :reports
 
   root to: "transactions#index"

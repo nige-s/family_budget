@@ -1,11 +1,13 @@
 class ReportsController < ApplicationController
+	require 'transactions_filter.rb'
+	before_action :user_transactions, only: [:index, :transactions_filter, :summary]
   def index
     if params['report']
 	  transactions_filter
 	else
-	  @trans = Transaction.all
+	  #@trans = Transaction.all
 	  @report = Report.new
-	  @report.sdate = "01/01/2013"
+	  @report.sdate = "01/03/2014"
     end
 
   end
@@ -13,7 +15,6 @@ class ReportsController < ApplicationController
   def transactions_filter
   	if params['report']
   	  @report = Report.new(transaction_params)
-	  @trans = Transaction.all
       @report.sdate = Date.today - 30 if @report.sdate == nil
 	  @report.edate = Date.today if @report.edate == nil
 
@@ -25,7 +26,8 @@ class ReportsController < ApplicationController
 
       @trans = @trans.where("tran_date >= ?", @report.sdate).where("tran_date <= ?", @report.edate).order('tran_date DESC')
 	else
-      @trans = Transaction.all
+
+      #@trans = Transaction.all
 	  @report = Report.new
 	  @report.sdate = "01/01/2013"
 	end
@@ -39,17 +41,24 @@ class ReportsController < ApplicationController
 	  if params['report']
 	  	@report = Report.new(transaction_params)
 		@cats.each do |cat|
-		  @summary[cat.name] = Transaction.where(:category_id => cat.id).where("tran_date >= ?", @report.sdate).where("tran_date <= ?", @report.edate).order('tran_date DESC').sum(:amount)
+		  @summary[cat.name] = @trans.where(:category_id => cat.id).where("tran_date >= ?", @report.sdate).where("tran_date <= ?", @report.edate).order('tran_date DESC').sum(:amount)
 		end
 	  else
 	    @report = Report.new
 		@cats.each do |cat|
-		  @summary[cat.name] = Transaction.where(:category_id => cat.id).sum(:amount)
+		  @summary[cat.name] = @trans.where(:category_id => cat.id).sum(:amount)
 		end
 	  end
+	  @total = @trans.sum(:amount)
 	end
 	# Never trust parameters from the scary internet, only allow the white list through.
     def transaction_params
       params.require(:report).permit(:user_id, :sdate, :edate, :trantype_id, :category_id, :range, :sign)
+    end
+
+    private
+    def user_transactions
+      tran_filter = TransactionsFilter.new
+      @trans = tran_filter.user_transactions(current_user).page params[:page]
     end
 end
