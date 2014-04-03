@@ -41,15 +41,8 @@
     <% end %>
   </tbody>
 </table>
-<% if params[:total] %>
-   <%= paginate @trans, :params => {total: params[:total]}%>
-   <% content_for :total do %>
-    <div class = "alert alert-success"><%= "Total spent: #{number_to_currency(params[:total], unit: '£')} " %></div>
-   <% end %>
-<% else %>
-  <%= paginate @trans, :params => {total: ReportsController.total}%>
-  <% content_for :total do %>
-   <div class = "alert alert-success"><%= "Total spent: #{number_to_currency(ReportsController.total, unit: '£')} "  %></div>
-   <% end %>
-<% end %>
 
+<% @total = params[:total] ||  ReportsController.total %>
+<%= paginate @trans, :params => {:total => @total} %>
+<% render 'total', :params => {:t => @total} %>
+  
