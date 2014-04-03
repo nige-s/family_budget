@@ -3,5 +3,5 @@ class Transaction < ActiveRecord::Base
 	belongs_to :user
 	belongs_to :category
 
-	paginates_per 10
+	#paginates_per 10
 end

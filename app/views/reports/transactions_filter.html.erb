@@ -46,6 +46,12 @@
     <% end %>
   </tbody>
 </table>
-<p class='text-info' ><strong>Total spent: <%= number_to_currency(@total, unit: '£')  %></strong></p>
-<%= paginate @trans %>
+<% if params[:total] %>
+   <% flash[:notice] = "Total spent: #{number_to_currency(params[:total], unit: '£')} " %>
+   <%= paginate @trans, :params => {total: params[:total]}%>
+<% else %>
+  <% flash[:notice] = "Total spent: #{number_to_currency(ReportsController.total, unit: '£')} " %>
+  <%= paginate @trans, :params => {total: ReportsController.total}%>
+<% end %>
+
 <%= link_to 'Back', reports_path %>

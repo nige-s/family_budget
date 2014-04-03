@@ -1,5 +1,6 @@
 class TransactionsController < ApplicationController
   require 'transactions_filter.rb'
+  
   before_action :set_transaction, only: [:show, :edit, :update, :destroy]
   
   # GET /transactions

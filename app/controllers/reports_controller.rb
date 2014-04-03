@@ -1,6 +1,13 @@
 class ReportsController < ApplicationController
 	require 'transactions_filter.rb'
 	before_action :user_transactions, only: [:index, :transactions_filter, :summary]
+
+	@@total = 0
+
+  def self.total
+    @@total
+  end
+
   def index
     if params['report']
 	  transactions_filter
@@ -31,7 +38,7 @@ class ReportsController < ApplicationController
 	  @report = Report.new
 	  @report.sdate = "01/01/2013"
 	end
-	  @total = @trans.sum(:amount)
+	  @@total = @trans.sum(:amount)
   end
 
   def summary
@@ -49,7 +56,7 @@ class ReportsController < ApplicationController
 		  @summary[cat.name] = @trans.where(:category_id => cat.id).sum(:amount)
 		end
 	  end
-	  @total = @trans.sum(:amount)
+	  @@total = @trans.sum(:amount)
 	end
 	# Never trust parameters from the scary internet, only allow the white list through.
     def transaction_params
