@@ -25,11 +25,11 @@
   </thead>
 
   <tbody>
-    <% @cats.each do |cat| %>
+    <% @summary.each do |key, val| %>
       <tr>
-        <% if cat.name? %>
-        <td><%= cat.name %></td>
-        <td><%= number_to_currency(@summary[cat.name], unit: '£') %></td>
+        <% if val %>
+        <td><%= key %></td>
+        <td><%= number_to_currency(val.to_i, unit: '£') %></td>
         <% else %>
         <td> Not Known </td>
         <% end %>
@@ -38,5 +38,5 @@
   </tbody>
 </table>
 <% content_for :total do %>
-   <div class = "alert alert-success"><%= "Total spent: #{number_to_currency(ReportsController.total, unit: '£')} "%></div>
+   <div class = "alert alert-success"><%= "Total spent: #{number_to_currency(@summary['total'], unit: '£')} "%></div>
    <% end %>

@@ -42,8 +42,8 @@
 </table>
 
 <% @total = params[:total] ||  @total %>
-<%= paginate @transactions, :params => {:total => @total} %>
-<% render 'partials/total', :params => {:t => @total} %>
+<%= paginate @transactions, :params => {:total_s => @total} %>
+<% render 'partials/total', :params => {:total_s => @total, :tran_count => @count} %>
 
 <% link_to t('.new', :default => t("helpers.links.new")), new_transaction_path, :class => 'btn btn-primary' %>
 

@@ -1,61 +1,32 @@
 class ReportsController < ApplicationController
-	require 'transactions_filter.rb'
-	before_action :user_transactions, only: [:index, :transactions_filter, :summary]
-
-	@@total = 0
-
-  def self.total
-    @@total
-  end
+  before_action :user_transactions, only: [:index, :transactions_filter, :summary]
 
   def index
-if params['report']
-  	  @report = Report.new(transaction_params)
-      @report.sdate = Date.today - 30 if @report.sdate == nil
-	  @report.edate = Date.today if @report.edate == nil
+    @report = Report.report_instance(transaction_params)
+    @transactions = Report.filter_transactions(@report,@trans)
+    @tran_count = @transactions.count
+    @total = @transactions.sum(:amount)
 
-	  @report.attributes.each do |key, val|
-	    if val 
-		  @trans = @trans.where(key => val) unless Report.columns_hash[key].type == :date
-		end
-	  end
-
-      @trans = @trans.where("tran_date >= ?", @report.sdate).where("tran_date <= ?", @report.edate).order('tran_date DESC')
-	else
-
-      #@trans = Transaction.all
-	  @report = Report.new
-	  @report.sdate = "01/03/2014"
-	end
-	  @@total = @trans.sum(:amount)
+    #required for pagination
+    @transactions = @transactions.page params[:page]
   end
 
   def summary
-  	@cats = Category.all
-	@summary = {}
-
-	  if params['report']
-	  	@report = Report.new(transaction_params)
-		@cats.each do |cat|
-		@summary[cat.name] = @trans.where(:category_id => cat.id).where("tran_date >= ?", @report.sdate).where("tran_date <= ?", @report.edate).order('tran_date DESC').sum(:amount)
-		end
-	  else
-	    @report = Report.new
-	    @report.sdate = "01/03/2014"
-		@cats.each do |cat|
-		  @summary[cat.name] = @trans.where(:category_id => cat.id).sum(:amount)
-		end
-	  end
-	  @@total = @trans.sum(:amount)
+    @report = Report.report_instance(transaction_params)
+    @summary = Report.category_sums(transaction_params, @trans, @report)
+    @total = @trans.sum(:amount)
+  end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def transaction_params
+  	if params[:report]
+      params.require(:report).permit(:user_id, :sdate, :edate, :trantype_id, :category_id, :range, :sign) 
+	else
+	  nil
 	end
-	# Never trust parameters from the scary internet, only allow the white list through.
-    def transaction_params
-      params.require(:report).permit(:user_id, :sdate, :edate, :trantype_id, :category_id, :range, :sign)
-    end
+  end
 
-    private
-    def user_transactions
-      tran_filter = TransactionsFilter.new
-      @trans = tran_filter.user_transactions(current_user).page params[:page]
-    end
+  private
+  def user_transactions
+    @trans = Transaction.user_transactions(current_user)
+  end
 end

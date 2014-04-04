@@ -1,0 +1,6 @@
+ <% content_for :total do %>
+   <div class = "alert alert-info">
+     <%= "Total spent: #{number_to_currency(10, unit: '£')} " %>
+     <%= "Transaction count: #{params[:tran_count]} " %>
+    </div>
+  <% end %>

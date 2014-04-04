@@ -1,14 +1,13 @@
 class TransactionsController < ApplicationController
-  require 'transactions_filter.rb'
-  
   before_action :set_transaction, only: [:show, :edit, :update, :destroy]
   
   # GET /transactions
   # GET /transactions.json
   def index
-    trans_filter = TransactionsFilter.new
-    @transactions = trans_filter.user_transactions(current_user).page params[:page]
-    @total = @transactions.sum(:amount)
+    @transactions = Transaction.user_transactions(current_user)
+    @count = @transactions.count
+    @total = Transaction.sum_transactions(@transactions) 
+    @transactions = @transactions.page params[:page]
   end
 
   # GET /transactions/1
