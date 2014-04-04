@@ -1,4 +1,8 @@
 class Report < ActiveRecord::Base
+ 
+  def after_initialize
+    self.edate ||= Date.today if new_record?
+  end
   def self.filter_transactions(rport,trans)
     if rport
       rport.attributes.each do |key, val|
