@@ -37,6 +37,4 @@
     <% end %>
   </tbody>
 </table>
-<% content_for :total do %>
-   <div class = "alert alert-success"><%= "Total spent: #{number_to_currency(@summary['total'], unit: '£')} "%></div>
-   <% end %>
+<% render 'partials/total' , :params => {:total_s => @summary['total']} %>
