@@ -5,12 +5,9 @@
 <%= link_to "Home", transactions_path %>
 
 <%= form_for @report, :url => {:action => 'summary'}, method: :get do |f| %>
-<div>
-    <%= f.date_select :sdate %>
-    <div>
-      <%= f.date_select :edate %>
-  </div>
-</div>
+<div><%= f.collection_select(:user_id, User.all, :id, :name,:include_blank => 'Please Select a user') %></div>
+<div> <%= f.date_select :sdate %></div>
+<div><%= f.date_select :edate %></div>
     <%= f.submit %>
 <% end %>
 
@@ -29,7 +26,7 @@
       <tr>
         <% if val %>
         <td><%= key %></td>
-        <td><%= number_to_currency(val.to_i, unit: '£') %></td>
+        <td><%= number_to_currency(val, unit: '£') %></td>
         <% else %>
         <td> Not Known </td>
         <% end %>

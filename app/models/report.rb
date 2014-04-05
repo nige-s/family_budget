@@ -32,12 +32,19 @@ class Report < ActiveRecord::Base
 
     cats = Category.all
     summary = {}
-    total = 0
+    total = 0.0
+    sub_total = 0.0
 
     if transaction_params
       cats.each do |cat|
+        if report.user_id
+sub_total = trans.where(:category_id => cat.id, :user_id => report.user_id ).where("tran_date >= ?", report.sdate).where("tran_date <= ?", report.edate).order('tran_date DESC').sum(:amount)
+  
+        else
 	sub_total = trans.where(:category_id => cat.id).where("tran_date >= ?", report.sdate).where("tran_date <= ?", report.edate).order('tran_date DESC').sum(:amount)
-	total += sub_total 
+	
+  end
+  total += sub_total 
 	summary[cat.name] = sub_total
       end
     else
