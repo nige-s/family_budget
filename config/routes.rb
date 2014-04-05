@@ -1,5 +1,9 @@
 BudgetPlanner::Application.routes.draw do
  
+  resources :account_transactions
+
+  resources :accounts
+
   devise_for :users
   get '/users/new_user', to: 'devise#new_user_registration'
   

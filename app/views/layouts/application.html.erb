@@ -67,13 +67,18 @@
         <div class="span3">
           <div class="well sidebar-nav">
             <ul class="nav nav-list">
-              <li class="nav-header">Actions</li>
+              <li class="nav-header">Cash Tracking</li>
               <li><%= link_to "All Transactions", transactions_path %></li>
               <li><%= link_to 'Filter Transactions',reports_path %></li>
               <li><%= link_to 'Transaction Summary',reports_summary_path %></li>
               <li><%= link_to 'New Transaction', new_transaction_path %></li>
               <li><%= link_to 'Transaction types', trantypes_path %></li>
               <li><%= link_to 'Categories', categories_path %></li>
+              <li class="nav-header">Accounts</li>
+              <li><%= link_to 'Accounts',accounts_path %></li>
+              <li><%= link_to 'New Account', new_account_path %></li>
+              <li><%= link_to 'Account Transactions', account_transactions_path %></li>
+              <li><%= link_to 'New Account Transaction', new_account_transaction_path %></li>
             </ul>
           </div><!--/.well -->
           <p><%= content_for :total %></p>
