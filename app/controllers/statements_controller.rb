@@ -4,8 +4,8 @@ class StatementsController < ApplicationController
   # GET /statements
   # GET /statements.json
   def index
-    @statement = Statement.new(acc_id: params[:statement][:acc_id])
-    @acc_transactions = Account.find(@statement.acc_id).account_transactions 
+    @statement = Statement.new(statement_params)
+    @acc_transactions = Account.find(@statement.acc_id).account_transactions.where("tran_date <= ?", @statement.edate)
     @acc_balance = Statement.account_balance(@statement.acc_id)
   end
 
@@ -71,6 +71,6 @@ class StatementsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def statement_params
-      params.require(:statement).permit(:acc_id, :sdate, :edate)
+      params.require(:statement).permit(:acc_id, :edate)
     end
 end

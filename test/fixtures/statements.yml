@@ -2,10 +2,8 @@
 
 one:
   acc_id: 1
-  sdate: 1
-  edate: 1
+  edate: 2014-04-06
 
 two:
   acc_id: 1
-  sdate: 1
-  edate: 1
+  edate: 2014-04-06
