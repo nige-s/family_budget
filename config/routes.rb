@@ -1,9 +1,11 @@
 BudgetPlanner::Application.routes.draw do
  
-  resources :recurring_transactions
+  resources :statements, only: [:index]
 
+  resources :recurring_transactions
   resources :account_transactions
 
+  match 'accounts/:id/statement', to: 'accounts#statement', as: 'account_statement', via: [:get, :post]
   resources :accounts
 
   devise_for :users
@@ -24,7 +26,7 @@ BudgetPlanner::Application.routes.draw do
   resources :transactions 
 
   get '/reports/summary'
-  resources :reports
+  resources :reports, only: [:index]
 
   root to: "transactions#index"
 

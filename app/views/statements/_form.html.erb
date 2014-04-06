@@ -1,0 +1,26 @@
+<%= form_for @statement, :html => { :class => 'form-horizontal' } do |f| %>
+  <div class="control-group">
+    <%= f.label :acc_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :acc_id, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :sdate, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :sdate, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :edate, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :edate, :class => 'text_field' %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                statements_path, :class => 'btn' %>
+  </div>
+<% end %>

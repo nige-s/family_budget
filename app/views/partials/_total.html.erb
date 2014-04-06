@@ -1,6 +1,7 @@
 <% content_for :total do %>
   <% if params[:total_s] %>
-    <div class = "alert alert-info"> <%= "Total spent: #{number_to_currency(params[:total_s], unit: '£')} " %></div>
+  <% total_title = params[:total_title] ? params[:total_title] : 'Total' %>
+    <div class = "alert alert-info"> <%= "#{total_title}: #{number_to_currency(params[:total_s], unit: '£')} " %></div>
   <% end %>
   <% if params[:tran_count] %>
     <div class = "alert alert-success"> <%= "Transaction count: #{params[:tran_count]} " %></div>

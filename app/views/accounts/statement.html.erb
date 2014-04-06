@@ -1,8 +1,20 @@
-<%- model_class = AccountTransaction -%>
+<%- model_class = Transaction -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+  <h1><%=t Account.find(params[:id]).name %> Account - Transactions</h1>
 </div>
-<table class="table table-striped">
+<%= @account.id %>
+<%= form_for @account, :url => account_statement_path(), :html => { :class => 'form-horizontal' }, method: :post do |f| %>
+  <div class="control-group">
+    <div class="controls">
+	  <%= f.collection_select(:id, Account.all, :id, :name, :include_blank => 'Select an Account') %> 
+  </div>
+</div>
+<div class="form-actions">
+    <%= f.submit 'Create Statement', :class => 'btn btn-primary' %>   
+  </div>
+<% end %>	
+   
+    <table class="table table-striped">
   <thead>
     <tr>
       <th><%= model_class.human_attribute_name(:id) %></th>
@@ -15,7 +27,7 @@
     </tr>
   </thead>
   <tbody>
-    <% @account_transactions.each do |account_transaction| %>
+     <% Account.find(params[:id]).account_transactions.each do |account_transaction| %>
       <tr>
         <td><%= link_to account_transaction.id, account_transaction_path(account_transaction) %></td>
         <td><%= Account.find(account_transaction.account_id).name %></td>
@@ -37,6 +49,4 @@
   </tbody>
 </table>
 
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_account_transaction_path,
-            :class => 'btn btn-primary' %>
+

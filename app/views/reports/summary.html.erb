@@ -5,8 +5,10 @@
 <%= link_to "Home", transactions_path %>
 
 <%= form_for @report, :url => {:action => 'summary'}, method: :get do |f| %>
-<div><%= f.collection_select(:user_id, User.all, :id, :name,:include_blank => 'Please Select a user') %></div>
-<div> <%= f.date_select :sdate %></div>
+	<% if current_user.id == 1 || current_user.id == 2 %>
+	<div><%= f.collection_select(:user_id, User.all, :id, :name,:include_blank => 'Please Select a user') %></div>
+<% end %>
+	<div> <%= f.date_select :sdate %></div>
 <div><%= f.date_select :edate %></div>
     <%= f.submit %>
 <% end %>

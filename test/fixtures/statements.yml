@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  acc_id: 1
+  sdate: 1
+  edate: 1
+
+two:
+  acc_id: 1
+  sdate: 1
+  edate: 1

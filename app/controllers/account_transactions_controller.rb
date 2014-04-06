@@ -6,7 +6,7 @@ class AccountTransactionsController < ApplicationController
   def index
     @account_transactions = AccountTransaction.all
   end
-
+  
   # GET /account_transactions/1
   # GET /account_transactions/1.json
   def show

@@ -8,6 +8,7 @@
       <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:account_id) %></th>
       <th><%= model_class.human_attribute_name(:interval) %></th>
+      <th><%= model_class.human_attribute_name(:day) %></th>
       <th><%= model_class.human_attribute_name(:description) %></th>
       <th><%= model_class.human_attribute_name(:amount) %></th>
       <th><%= model_class.human_attribute_name(:sign) %></th>
@@ -15,8 +16,6 @@
       <th><%= model_class.human_attribute_name(:start_date) %></th>
       <th><%= model_class.human_attribute_name(:end_date) %></th>
       <th><%= model_class.human_attribute_name(:last_updated) %></th>
-      <th><%= model_class.human_attribute_name(:day) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
@@ -24,17 +23,16 @@
     <% @recurring_transactions.each do |recurring_transaction| %>
       <tr>
         <td><%= link_to recurring_transaction.id, recurring_transaction_path(recurring_transaction) %></td>
-        <td><%= recurring_transaction.account_id %></td>
+        <td><%= Account.find(recurring_transaction.account_id).name %></td>
         <td><%= recurring_transaction.interval %></td>
+        <td><%= recurring_transaction.day %></td>
         <td><%= recurring_transaction.description %></td>
-        <td><%= recurring_transaction.amount %></td>
+        <td><%= number_to_currency( recurring_transaction.amount, unit: '£') %></td>
         <td><%= recurring_transaction.sign %></td>
         <td><%= recurring_transaction.active %></td>
         <td><%= recurring_transaction.start_date %></td>
         <td><%= recurring_transaction.end_date %></td>
         <td><%= recurring_transaction.last_updated %></td>
-        <td><%= recurring_transaction.day %></td>
-        <td><%=l recurring_transaction.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_recurring_transaction_path(recurring_transaction), :class => 'btn btn-mini' %>
