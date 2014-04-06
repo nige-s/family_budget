@@ -1,0 +1,54 @@
+<%- model_class = RecurringTransaction -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:account_id) %></th>
+      <th><%= model_class.human_attribute_name(:interval) %></th>
+      <th><%= model_class.human_attribute_name(:description) %></th>
+      <th><%= model_class.human_attribute_name(:amount) %></th>
+      <th><%= model_class.human_attribute_name(:sign) %></th>
+      <th><%= model_class.human_attribute_name(:active) %></th>
+      <th><%= model_class.human_attribute_name(:start_date) %></th>
+      <th><%= model_class.human_attribute_name(:end_date) %></th>
+      <th><%= model_class.human_attribute_name(:last_updated) %></th>
+      <th><%= model_class.human_attribute_name(:day) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @recurring_transactions.each do |recurring_transaction| %>
+      <tr>
+        <td><%= link_to recurring_transaction.id, recurring_transaction_path(recurring_transaction) %></td>
+        <td><%= recurring_transaction.account_id %></td>
+        <td><%= recurring_transaction.interval %></td>
+        <td><%= recurring_transaction.description %></td>
+        <td><%= recurring_transaction.amount %></td>
+        <td><%= recurring_transaction.sign %></td>
+        <td><%= recurring_transaction.active %></td>
+        <td><%= recurring_transaction.start_date %></td>
+        <td><%= recurring_transaction.end_date %></td>
+        <td><%= recurring_transaction.last_updated %></td>
+        <td><%= recurring_transaction.day %></td>
+        <td><%=l recurring_transaction.created_at %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_recurring_transaction_path(recurring_transaction), :class => 'btn btn-mini' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      recurring_transaction_path(recurring_transaction),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_recurring_transaction_path,
+            :class => 'btn btn-primary' %>

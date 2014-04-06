@@ -1,5 +1,7 @@
 BudgetPlanner::Application.routes.draw do
  
+  resources :recurring_transactions
+
   resources :account_transactions
 
   resources :accounts

@@ -1,0 +1,68 @@
+<%= form_for @recurring_transaction, :html => { :class => 'form-horizontal' } do |f| %>
+  <div class="control-group">
+    <%= f.label :account_id, :class => 'control-label' %>
+    <div class="controls">
+	    <%= f.collection_select( :account_id, Account.all,:id, :name, :include_blank => 'Select Account') %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :interval, :class => 'control-label' %>
+    <div class="controls">
+	    <%= f.select( :interval, {'monthly' => 'monthly', 'quarterly' => 'quarterly'}, :include_blank => 'Select interval')  %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :description, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :description, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :amount, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :amount, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :sign, :class => 'control-label' %>
+    <div class="controls">
+	    <%= f.select(:sign, {'DEBIT' => 'debit', 'CREDIT' => 'credit'}, :include_blank => 'Select type') %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :active, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :active, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :start_date, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :start_date, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :end_date, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :end_date, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :last_updated, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :last_updated, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :day, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :day, :class => 'text_field' %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                recurring_transactions_path, :class => 'btn' %>
+  </div>
+<% end %>

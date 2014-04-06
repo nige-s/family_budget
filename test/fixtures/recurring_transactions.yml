@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  account_id: 1
+  interval: MyString
+  description: MyString
+  amount: 9.99
+  sign: MyString
+  active: false
+  start_date: 2014-04-05
+  end_date: 2014-04-05
+  last_updated: 2014-04-05
+  day: 1
+
+two:
+  account_id: 1
+  interval: MyString
+  description: MyString
+  amount: 9.99
+  sign: MyString
+  active: false
+  start_date: 2014-04-05
+  end_date: 2014-04-05
+  last_updated: 2014-04-05
+  day: 1
