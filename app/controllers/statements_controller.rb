@@ -6,7 +6,7 @@ class StatementsController < ApplicationController
   def index
     @statement = Statement.new(statement_params)
     @acc_transactions = Account.find(@statement.acc_id).account_transactions.where("tran_date <= ?", @statement.edate)
-    @acc_balance = Statement.account_balance(@statement.acc_id)
+    @acc_balance = Statement.account_balance(@statement)
   end
 
   # GET /statements/1
