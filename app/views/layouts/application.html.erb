@@ -76,6 +76,9 @@
               <li><%= link_to 'Categories', categories_path %></li>
               <li class="nav-header">Accounts</li>
               <li><%= link_to 'Accounts',accounts_path %></li>
+              <% if Account.count > 0 %>
+              <li><%= link_to 'Statements', statements_path('statement' => {:acc_id => Account.first.id}) %></li>
+              <% end %>
               <li><%= link_to 'New Account', new_account_path %></li>
               <li><%= link_to 'Account Transactions', account_transactions_path %></li>
               <li><%= link_to 'New Account Transaction', new_account_transaction_path %></li>
