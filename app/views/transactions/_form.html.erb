@@ -1,4 +1,4 @@
-<%= form_for(@transaction) do |f| %>
+<%= form_for @transaction, :html => { :class => 'form-horizontal' } do |f| %>
   <% if @transaction.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@transaction.errors.count, "error") %> prohibited this transaction from being saved:</h2>
@@ -10,34 +10,52 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.collection_select(:user_id, User.all, :id, :name,:include_blank => 'Please Select a user') %>
-  </div>
-  <div class="field">
+ 
+  <!-- <div class="field">-->
+  <input type="hidden" name="user_id" value="<%= @transaction.user_id %>">
+    <%# f.collection_select(:user_id, User.all, :id, :name,:include_blank => 'Please Select a user') %>
+ <!-- </div>-->
+   <div class="control-group">
+    <%= f.label :tran_date, :class => 'control-label' %>
+    <div class="controls">
     <%= f.date_select :tran_date %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.collection_select(:trantype_id, Trantype.all, :id, :name,:include_blank => 'Please Select a type') %>
+   <div class="control-group">
+    <%= f.label :trantype_id, :class => 'control-label' %>
+    <div class="controls">
+    <%= f.collection_select(:trantype_id, Trantype.all, :id, :name,:include_blank => 'Select a type') %>
   </div>
-  <div class="field">
-    <%= f.collection_select(:category_id, Category.all, :id, :name,:include_blank => 'Please Select a category') %>
+ </div>
+   <div class="control-group">
+    <%= f.label :category_id, :class => 'control-label' %>
+    <div class="controls">
+    <%= f.collection_select(:category_id, Category.all, :id, :name,:include_blank => 'Select a category') %>
   </div>
-  <div class="field">
-    <%= f.label :description %><br>
+</div>
+   <div class="control-group">
+    <%= f.label :description, :class => 'control-label' %>
+    <div class="controls">
     <%= f.text_field :description %>
   </div>
-  <div class="field">
-    <%= f.label :supplier %><br>
+</div>
+   <div class="control-group">
+    <%= f.label :supplier, :class => 'control-label' %>
+    <div class="controls">
     <%= f.text_field :supplier %>
   </div>
-  <div class="field">
-    <%= f.label :amount %><br>
+</div>
+  <div class="control-group">
+    <%= f.label :amount, :class => 'control-label' %>
+    <div class="controls">
     <%= f.text_field :amount %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+</div>
+ <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
   </div>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                transactions_path, :class => 'btn' %>
 <% end %>
 
 
