@@ -28,7 +28,7 @@ BudgetPlanner::Application.routes.draw do
   get '/reports/summary'
   resources :reports, only: [:index]
 
-  root to: "transactions#index"
+  root to: "welcome#index"
 
 
   

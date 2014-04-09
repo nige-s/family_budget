@@ -1,6 +1,12 @@
 class TransactionsController < ApplicationController
+  skip_before_action :authenticate_user!
   before_action :set_transaction, only: [:show, :edit, :update, :destroy]
-  
+  before_action :check_auth
+
+
+def check_auth
+  redirect_to :welcome => :index unless user_signed_in?   
+end  
   # GET /transactions
   # GET /transactions.json
   def index
