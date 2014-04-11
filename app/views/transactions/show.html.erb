@@ -5,19 +5,19 @@
 
 <dl class="dl-horizontal">
   <dt><strong><%= model_class.human_attribute_name(:user_id) %>:</strong></dt>
-  <dd><%= @transaction.user_id %></dd>
+  <dd><%= User.find(@transaction.user_id).name || @transaction.user_id %></dd>
   <dt><strong><%= model_class.human_attribute_name(:tran_date) %>:</strong></dt>
   <dd><%= @transaction.tran_date %></dd>
   <dt><strong><%= model_class.human_attribute_name(:trantype_id) %>:</strong></dt>
-  <dd><%= @transaction.trantype_id %></dd>
+  <dd><%= Trantype.find(@transaction.trantype_id).name ||  @transaction.trantype_id  %></dd>
   <dt><strong><%= model_class.human_attribute_name(:category_id) %>:</strong></dt>
-  <dd><%= @transaction.category_id %></dd>
+  <dd><%= Category.find(@transaction.category_id).name || @transaction.category_id %></dd>
   <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
   <dd><%= @transaction.description %></dd>
   <dt><strong><%= model_class.human_attribute_name(:supplier) %>:</strong></dt>
   <dd><%= @transaction.supplier %></dd>
   <dt><strong><%= model_class.human_attribute_name(:amount) %>:</strong></dt>
-  <dd><%= @transaction.amount %></dd>
+  <dd><%= number_to_currency(@transaction.amount, unit: '£') %></dd>
   <dt><strong><%= model_class.human_attribute_name(:sign) %>:</strong></dt>
   <dd><%= @transaction.sign %></dd>
 </dl>
