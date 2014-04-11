@@ -10,9 +10,7 @@
       </ul>
     </div>
   <% end %>
- 
-  <!-- <div class="field">-->
-  <input type="hidden" name="user_id" value="<%= @transaction.user_id %>">
+  <%= f.hidden_field :user_id, :value => @transaction.user_id %> 
     <%# f.collection_select(:user_id, User.all, :id, :name,:include_blank => 'Please Select a user') %>
  <!-- </div>-->
    <div class="control-group">
@@ -52,7 +50,7 @@
   </div>
 </div>
  <div class="form-actions">
-    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= f.submit :class => 'btn btn-primary' %>
   </div>
   <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
                 transactions_path, :class => 'btn' %>

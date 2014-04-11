@@ -3,6 +3,7 @@ class Transaction < ActiveRecord::Base
 	belongs_to :user
 	belongs_to :category
 
+  validates_presence_of :user_id
 def self.user_transactions(curr_user)
   if(curr_user.id == 1 || curr_user.id ==2)
     Transaction.where(user_id: [1, 2]).order('tran_date DESC')
