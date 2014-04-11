@@ -2,7 +2,7 @@
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
 </div>
-
+<p>Show</p>
 <dl class="dl-horizontal">
   <dt><strong><%= model_class.human_attribute_name(:user_id) %>:</strong></dt>
   <dd><%= User.find(@transaction.user_id).name || @transaction.user_id %></dd>
@@ -13,9 +13,9 @@
   <dt><strong><%= model_class.human_attribute_name(:category_id) %>:</strong></dt>
   <dd><%= Category.find(@transaction.category_id).name || @transaction.category_id %></dd>
   <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
-  <dd><%= @transaction.description %></dd>
+  <dd><%= @transaction.description == "" ? '<No Description>' : @transaction.description %></dd>
   <dt><strong><%= model_class.human_attribute_name(:supplier) %>:</strong></dt>
-  <dd><%= @transaction.supplier %></dd>
+  <dd><%= @transaction.supplier == "" ? '<No Description>' : @transaction.supplier %></dd>
   <dt><strong><%= model_class.human_attribute_name(:amount) %>:</strong></dt>
   <dd><%= number_to_currency(@transaction.amount, unit: '£') %></dd>
   <dt><strong><%= model_class.human_attribute_name(:sign) %>:</strong></dt>
