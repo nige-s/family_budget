@@ -1,7 +1,6 @@
 <%- model_class = Report -%>
-
+<div><p>Date range: <strong> <%= @date_range[:first_date].to_s(:long) %></strong> to <strong><%= @date_range[:last_date].to_s(:long) %></strong></p></div>
 <%= render 'form' %>
-<div>Date range: <%= @date_range[:first_date] %> to <%= @date_range[:last_date] %></div>
 <table class="table table-striped">
   <thead>
     <tr>
