@@ -5,8 +5,8 @@ class ReportsController < ApplicationController
     @report = Report.report_instance(transaction_params)
     @transactions = Report.filter_transactions(@report,@trans)
     @tran_count = @transactions.count
+    @date_range = Report.date_range(@transactions)
     @total = @transactions.sum(:amount)
-
     #required for pagination
     @transactions = @transactions.page params[:page]
   end

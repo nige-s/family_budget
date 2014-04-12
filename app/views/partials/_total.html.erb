@@ -2,7 +2,7 @@
   <% alert_types = {positive: "alert alert-info", negative: "alert alert-error"} %>
 
   <% if params[:total_s] %>
-    <% alert_type = params[:total_s] >= 0 ? :positive : :negative %> 
+    <% alert_type = params[:total_s].to_i >= 0 ? :positive : :negative %> 
     <% total_title = params[:total_title] ? params[:total_title] : 'Total' %>
     <div class = "<%= alert_types[alert_type] %>" > <%= "#{total_title}: #{number_to_currency(params[:total_s], unit: '£')} " %></div>
   <% end %>
