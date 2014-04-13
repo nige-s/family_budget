@@ -22,13 +22,13 @@
    <div class="control-group">
     <%= f.label :trantype_id, :class => 'control-label' %>
     <div class="controls">
-    <%= f.collection_select(:trantype_id, Trantype.all, :id, :name,:include_blank => 'Select a type') %>
+    <%= f.collection_select(:trantype_id, Trantype.user_trantypes(current_user.id), :id, :name,:include_blank => 'Select a type') %>
   </div>
   </div>
    <div class="control-group">
     <%= f.label :category_id, :class => 'control-label' %>
     <div class="controls">
-    <%= f.collection_select(:category_id, Category.all, :id, :name,:include_blank => 'Select a category') %>
+    <%= f.collection_select(:category_id, Category.user_categories(current_user.id), :id, :name,:include_blank => 'Select a category') %>
   </div>
 </div>
    <div class="control-group">
