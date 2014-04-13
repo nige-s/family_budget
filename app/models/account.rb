@@ -1,7 +1,9 @@
 class Account < ActiveRecord::Base
   has_many :account_transactions
   has_many :recurring_transactions
-  belongs_to :AccountHolder
+  
+  has_many :users, :through => :account_holders
+  has_many :account_holders
 
   def self.user_accounts(user_id)
   	accounts = []

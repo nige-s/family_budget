@@ -69,6 +69,6 @@ class TrantypesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def trantype_params
-      params.require(:trantype).permit(:name, :desc)
+      params.require(:trantype).permit(:name, :desc, :user_id)
     end
 end

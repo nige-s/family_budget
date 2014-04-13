@@ -1,4 +1,4 @@
 class AccountHolder < ActiveRecord::Base
-  has_many :users  
-  has_many :accounts
+  belongs_to :user 
+  belongs_to :account
 end
