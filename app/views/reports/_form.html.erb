@@ -5,7 +5,7 @@
 
     <%= f.collection_select(:trantype_id, Trantype.user_trantypes(current_user.id), :id, :name,:include_blank => 'Select a type') %>
 
-    <%= f.collection_select(:category_id, Category.user_categories(current_user.id), :id, :name,{:include_blank => 'Select a category'},{:multiple => true }) %>
+    <%= f.collection_select(:category_id, @report.categories, :id, :name,{:include_blank => 'Select a category'}) %>
 </div>
 <div>
     <%= f.date_select :sdate %>

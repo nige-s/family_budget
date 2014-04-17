@@ -9,6 +9,7 @@ class ReportsController < ApplicationController
     @total = @transactions.sum(:amount)
     #required for pagination
     @transactions = @transactions.page params[:page]
+    @cats = []
   end
 
   def summary

@@ -1,5 +1,5 @@
 class Report < ActiveRecord::Base
- 
+has_many :categories, :primary_key => 'user_id', :foreign_key => 'user_id' 
   def after_initialize
     self.edate ||= Date.today if new_record?
   end
