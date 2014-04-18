@@ -1,6 +1,6 @@
 <%- model_class = Report -%>
 <%= render 'form' %>
-<div>Date range: <strong> <%= @date_range[:first_date].to_s(:short) %></strong> to <strong><%= @date_range[:last_date].to_s(:short) %></strong></div>
+<div class = "alert alert-success">Date range: <strong> <%= @date_range[:first_date].to_s(:short) %></strong> to <strong><%= @date_range[:last_date].to_s(:short) %></strong></div>
 <table class="table table-striped">
   <thead>
     <tr>
