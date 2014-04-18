@@ -17,7 +17,7 @@
     </tr>
   </thead>
  <tbody>
-    <% @transactions.each do |transaction| %>
+    <% @trans.each do |transaction| %>
       <tr>
         <td><%= link_to transaction.id, transaction_path(transaction) %></td>
         <td><%= link_to User.find(transaction.user_id).name, reports_path("report"=>{:user_id => transaction.user_id}) %></td>
@@ -42,5 +42,5 @@
 </table>
 
 <% @total_spent = params[:total] ||  @total %>
-<%= paginate @transactions, :params => {:total => @total_spent} %>
+<%= paginate @trans, :params => {:total => @total_spent} %>
 <% render 'partials/total', :params => {:total_s =>  @total_spent, :tran_count => @tran_count} %> 

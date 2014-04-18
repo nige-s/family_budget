@@ -13,18 +13,20 @@ has_many :categories, :primary_key => 'user_id', :foreign_key => 'user_id'
      end
   end
 
-  def self.filter_transactions(rport,trans,cats,trantypes)
+  def self.filter_transactions(rport,trans)
     if rport
       rport.attributes.each do |key, val|
-  	if val 
-  	  trans = trans.where(key => val) unless Report.columns_hash[key].type == :date
-  	end
-  
-
-      trans =trans.where("tran_date >= ?", rport.sdate).where("tran_date <= ?", rport.edate).order('tran_date DESC')
+      	if val 
+           if key == "category_id" || key == "trantype_id"
+              trans = trans.where(key => val) unless val.count ==1 and val[0] == ""
+            else
+              trans = trans.where(key => val) unless Report.columns_hash[key].type == :date
+           end  	  
+      	end
       end
+      trans =trans.where("tran_date >= ?", rport.sdate).where("tran_date <= ?", rport.edate).order('tran_date DESC')
     end
-    return trans
+    trans
   end
 
   def self.report_instance(transaction_params)
