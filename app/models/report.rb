@@ -19,9 +19,7 @@ has_many :categories, :primary_key => 'user_id', :foreign_key => 'user_id'
       	if val 
            if key == "category_id" || key == "trantype_id"
               if (val.count == 1 && val[0] == "") || val.empty?
-                puts "Key: #{key} Val: #{val}"
               else
-                puts "Key-else: #{key} Val: #{val}"
                 trans = trans.where(key => val) 
               end
             else

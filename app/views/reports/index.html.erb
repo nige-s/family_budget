@@ -1,6 +1,18 @@
 <%- model_class = Report -%>
 <%= render 'form' %>
-<div class = "alert alert-success">Date range: <strong> <%= @date_range[:first_date].to_s(:short) %></strong> to <strong><%= @date_range[:last_date].to_s(:short) %></strong></div>
+<div class = "alert alert-success">Transaction date range: <strong> <%= @date_range[:first_date].to_s(:short) %></strong> to <strong><%= @date_range[:last_date].to_s(:short) %>. </strong>Filtered on: 
+<% @report.attributes.each do |key, val| %>
+<% if val %>
+    <% if val.kind_of?(Array)%>
+      <% unless (val.count == 1 && val[0] == "") || val.empty? %>
+        <strong><%= key  %>: </strong><i><%= val %></i>
+      <% end %>
+    <% else %>
+      <strong><%= key  %>: </strong><i><%= val %></i>
+    <% end %>
+<% end %>
+<% end %>
+</div>
 <table class="table table-striped">
   <thead>
     <tr>
