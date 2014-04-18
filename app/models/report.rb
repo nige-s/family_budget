@@ -18,10 +18,16 @@ has_many :categories, :primary_key => 'user_id', :foreign_key => 'user_id'
       rport.attributes.each do |key, val|
       	if val 
            if key == "category_id" || key == "trantype_id"
-              trans = trans.where(key => val) unless val.count ==1 and val[0] == ""
+              if (val.count == 1 && val[0] == "") || val.empty?
+                puts "Key: #{key} Val: #{val}"
+              else
+                puts "Key-else: #{key} Val: #{val}"
+                trans = trans.where(key => val) 
+              end
             else
+              puts "Key-last: #{key} Val: #{val}"
               trans = trans.where(key => val) unless Report.columns_hash[key].type == :date
-           end  	  
+           end      
       	end
       end
       trans =trans.where("tran_date >= ?", rport.sdate).where("tran_date <= ?", rport.edate).order('tran_date DESC')
