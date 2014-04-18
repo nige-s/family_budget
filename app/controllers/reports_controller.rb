@@ -2,14 +2,41 @@ class ReportsController < ApplicationController
   before_action :user_transactions, only: [:index, :transactions_filter, :summary]
 
   def index
+    
+
     @report = Report.report_instance(transaction_params)
-    @transactions = Report.filter_transactions(@report,@trans)
+
+    if params['report']
+      if params['report']['category_id']
+        if params['report']['category_id'].count > 1
+          @cats = params['report']['category_id']
+        else
+          @cats = Category.user_categories(current_user.id)
+        end
+      else
+        @cats = Category.user_categories(current_user.id)
+      end
+       if params['report']['trantype_id']
+         if params['report']['trantype_id'].count > 1
+           @trantypes = params['report']['trantype_id']
+        else
+           @trantypes = Trantype.user_trantypes(current_user.id)
+         end
+      else
+           @trantypes = Trantype.user_trantypes(current_user.id)
+      end
+
+    else
+      @cats = Category.user_categories(current_user.id)
+      @trantypes = Trantype.user_trantypes(current_user.id)
+    end
+    @transactions = Report.filter_transactions(@report,@trans,@cats,@trantypes)
     @tran_count = @transactions.count
     @date_range = Report.date_range(@transactions)
     @total = @transactions.sum(:amount)
+    
     #required for pagination
     @transactions = @transactions.page params[:page]
-    @cats = []
   end
 
   def summary
@@ -20,7 +47,7 @@ class ReportsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def transaction_params
   	if params[:report]
-      params.require(:report).permit(:user_id, :sdate, :edate, :trantype_id, :category_id, :range, :sign) 
+      params.require(:report).permit(:user_id, :sdate, :edate, :range, :sign, :category_id => [], :trantype_id => []) 
 	else
 	  nil
 	end

@@ -5,16 +5,23 @@ has_many :categories, :primary_key => 'user_id', :foreign_key => 'user_id'
   end
 
   def self.date_range(transactions)
-    transactions.sort_by! {|obj| obj.tran_date}
-    {:first_date => transactions.first.tran_date, :last_date => transactions.last.tran_date}
+    if transactions.count > 0
+       transactions.sort_by! {|obj| obj.tran_date}
+       {:first_date => transactions.first.tran_date, :last_date => transactions.last.tran_date}
+     else
+      {first_date: DateTime.now - 30, last_date: DateTime.now}
+     end
   end
 
-  def self.filter_transactions(rport,trans)
+  def self.filter_transactions(rport,trans,cats,trantypes)
     if rport
       rport.attributes.each do |key, val|
-	if val 
-	  trans = trans.where(key => val) unless Report.columns_hash[key].type == :date
-	end
+  	if val 
+  	  trans = trans.where(key => val) unless Report.columns_hash[key].type == :date
+  	end
+      trans = trans.where(category_id: cats)
+      trans = trans.where(trantype_id: trantypes)
+
       trans =trans.where("tran_date >= ?", rport.sdate).where("tran_date <= ?", rport.edate).order('tran_date DESC')
       end
     end

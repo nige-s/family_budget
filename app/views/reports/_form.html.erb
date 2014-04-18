@@ -1,20 +1,35 @@
 <%= form_for @report, method: :get, :html => { :class => 'form-horizontal' }  do |f| %>
 
-<div>
-    <%= f.collection_select(:user_id, User.all, :id, :name,:include_blank => 'Select a user') %>
+    
 
-    <%= f.collection_select(:trantype_id, Trantype.user_trantypes(current_user.id), :id, :name,:include_blank => 'Select a type') %>
 
-    <%= f.collection_select(:category_id, @report.categories, :id, :name,{:include_blank => 'Select a category'}) %>
-</div>
-<div>
-    <%= f.date_select :sdate %>
-    <div>
-      <%= f.date_select :edate %>
-  </div>
-</div>
-     <div class="form-actions">
-    <%= f.submit nil, :class => 'btn btn-primary' %>
-  </div>
+  <div class="row placeholders">
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <div>User
+              <p><%= f.collection_select(:user_id, User.all, :id, :name,:include_blank => 'Select a user') %></p>
+              </div>
+               <div>Start Date
+                <p><%= f.date_select :sdate %></p>
+              </div>
+              <div>End Date
+              <p><%= f.date_select :edate %></p>
+              </div>
+            </div>
+            <div class="col-xs-6 col-sm-2 placeholder"><p>Categories</p>
+              <%= f.collection_select(:category_id, Category.user_categories(current_user.id), :id, :name,{},{:multiple => true, size: Category.user_categories(current_user.id).count}) %>
+            </div>
+            <div class="col-xs-6 col-sm-2 placeholder"><p>Transaction Types</p>
+               <div>
+              <%= f.collection_select(:trantype_id, Trantype.user_trantypes(current_user.id), :id, :name,{},{:multiple => true, size: Trantype.user_trantypes(current_user.id).count}) %>
+              </div>
+             </div>
 
+              <div class="col-xs-6 col-sm-2 placeholder">
+               <div class="form-actions"><p>Create</p>
+                <%= f.submit nil, :class => 'btn btn-primary' %>
+             </div>
+           </div>
+
+            
+          </div>
 <% end %>
