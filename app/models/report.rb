@@ -19,8 +19,7 @@ has_many :categories, :primary_key => 'user_id', :foreign_key => 'user_id'
   	if val 
   	  trans = trans.where(key => val) unless Report.columns_hash[key].type == :date
   	end
-      trans = trans.where(category_id: cats)
-      trans = trans.where(trantype_id: trantypes)
+  
 
       trans =trans.where("tran_date >= ?", rport.sdate).where("tran_date <= ?", rport.edate).order('tran_date DESC')
       end

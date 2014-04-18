@@ -6,30 +6,7 @@ class ReportsController < ApplicationController
 
     @report = Report.report_instance(transaction_params)
 
-    if params['report']
-      if params['report']['category_id']
-        if params['report']['category_id'].count > 1
-          @cats = params['report']['category_id']
-        else
-          @cats = Category.user_categories(current_user.id)
-        end
-      else
-        @cats = Category.user_categories(current_user.id)
-      end
-       if params['report']['trantype_id']
-         if params['report']['trantype_id'].count > 1
-           @trantypes = params['report']['trantype_id']
-        else
-           @trantypes = Trantype.user_trantypes(current_user.id)
-         end
-      else
-           @trantypes = Trantype.user_trantypes(current_user.id)
-      end
 
-    else
-      @cats = Category.user_categories(current_user.id)
-      @trantypes = Trantype.user_trantypes(current_user.id)
-    end
     @transactions = Report.filter_transactions(@report,@trans,@cats,@trantypes)
     @tran_count = @transactions.count
     @date_range = Report.date_range(@transactions)
@@ -41,7 +18,7 @@ class ReportsController < ApplicationController
 
   def summary
     @report = Report.report_instance(transaction_params)
-    @summary = Report.category_sums(transaction_params, @trans, @report)
+    @summary = Report.category_sums(transaction_params)
     @total = @trans.sum(:amount)
   end
   # Never trust parameters from the scary internet, only allow the white list through.
