@@ -4,32 +4,51 @@
 
 
   <div class="row placeholders">
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <div>User
-              <p><%= f.collection_select(:user_id, User.all, :id, :name,:include_blank => 'Select a user') %></p>
-              </div>
-               <div>Start Date
-                <p><%= f.date_select :sdate %></p>
-              </div>
-              <div>End Date
-              <p><%= f.date_select :edate %></p>
-              </div>
-            </div>
-            <div class="col-xs-6 col-sm-2 placeholder"><p>Categories</p>
-              <%= f.collection_select(:category_id, Category.user_categories(current_user.id), :id, :name,{},{:multiple => true, size: Category.user_categories(current_user.id).count}) %>
-            </div>
-            <div class="col-xs-6 col-sm-2 placeholder"><p>Transaction Types</p>
-               <div>
-              <%= f.collection_select(:trantype_id, Trantype.user_trantypes(current_user.id), :id, :name,{},{:multiple => true, size: Trantype.user_trantypes(current_user.id).count}) %>
-              </div>
-             </div>
+    <div class="col-xs-6 col-sm-3 placeholder">
+     <div>User
+       <p><%= f.collection_select(:user_id, User.all, :id, :name,:include_blank => 'Select a user') %></p>
+     </div>
+     <div>Start Date
+       <p><%= f.date_select :sdate %></p>
+     </div>
+     <div>End Date
+       <p><%= f.date_select :edate %></p>
+     </div>
+  </div>
+      <div class="col-xs-6 col-sm-2 placeholder"><p>Categories</p>
+        <%= f.collection_select(:category_id, Category.user_categories(current_user.id), :id, :name,{},{:multiple => true, size: Category.user_categories(current_user.id).count}) %>
+      </div>
+      <div class="col-xs-6 col-sm-2 placeholder"><p>Transaction Types</p>
+        <div>
+          <%= f.collection_select(:trantype_id, Trantype.user_trantypes(current_user.id), :id, :name,{},{:multiple => true, size: Trantype.user_trantypes(current_user.id).count}) %>
+        </div>
+      </div>
 
-              <div class="col-xs-6 col-sm-2 placeholder">
-               <div class="form-actions"><p>Create</p>
-                <%= f.submit nil, :class => 'btn btn-primary' %>
-             </div>
+         <div class="col-xs-6 col-sm-2 placeholder">
+           <div class="control-group">
+             <%= f.label :description, :class => 'control-label' %>
+              <div class="controls">
+                <%= f.text_field :description %>
+              </div>
            </div>
 
-            
-          </div>
+           <div class="control-group">
+            <%= f.label :supplier, :class => 'control-label' %>
+             <div class="controls">
+               <%= f.text_field :supplier %>
+             </div>
+           </div>
+           <div class="control-group">
+             <%= f.label :amount, :class => 'control-label' %>
+               <div class="controls">
+                 <%= f.text_field :amount %>
+              </div>
+           </div>
+         </div>
+    </div> 
+         <div>
+           <%= f.submit nil, :class => 'btn btn-primary' %>
+         </div>
+                      
+
 <% end %>

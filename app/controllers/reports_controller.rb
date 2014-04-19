@@ -10,6 +10,7 @@ class ReportsController < ApplicationController
     end
     @tran_count = @trans.count
     @date_range = Report.date_range(@trans)
+    @period = @date_range[:last_date] - @date_range[:first_date]
     @total = @trans.sum(:amount)
     
     #required for pagination
@@ -24,7 +25,7 @@ class ReportsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def transaction_params
   	if params[:report]
-      params.require(:report).permit(:user_id, :sdate, :edate, :range, :sign, :category_id => [], :trantype_id => []) 
+      params.require(:report).permit(:user_id, :sdate, :edate, :range, :sign, :description, :supplier, :amount, :category_id => [], :trantype_id => []) 
 	else
 	  nil
 	end
