@@ -10,10 +10,18 @@
       </ul>
     </div>
   <% end %>
-  <%= f.hidden_field :user_id, :value => @transaction.user_id %> 
-    <%# f.collection_select(:user_id, User.all, :id, :name,:include_blank => 'Please Select a user') %>
- <!-- </div>-->
+  <% if (current_user.id == 1 || current_user.id == 2) %>
    <div class="control-group">
+     <%= f.label "User", :class => 'control-label' %>
+     <div class="controls">
+    <%= f.collection_select(:user_id, User.all, :id, :name,:include_blank => 'Please Select a user') %>
+     </div>
+   </div>
+  <% else %>
+  <%= f.hidden_field :user_id, :value => @transaction.user_id %> 
+  <% end %>
+ 
+     <div class="control-group">
     <%= f.label :tran_date, :class => 'control-label' %>
     <div class="controls">
       <%= f.date_select :tran_date %>
