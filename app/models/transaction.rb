@@ -9,7 +9,7 @@ class Transaction < ActiveRecord::Base
        :message => "%{value} is not a valid transaction type" }
 
   def correct_sign
-    if sign == 'debit' 
+    if sign == 'debit' && self.amount >= 0
       self.amount = -(self.amount)
     end
   end

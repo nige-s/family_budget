@@ -18,6 +18,7 @@ end
   # GET /transactions/1
   # GET /transactions/1.json
   def show
+    puts "Hit show instead of destroy action"
   end
 
   # GET /transactions/new
@@ -63,8 +64,8 @@ end
   # DELETE /transactions/1
   # DELETE /transactions/1.json
   def destroy
-    @hit = true
-    @transaction.destroy
+    puts "Hit destroy action"
+    #@transaction.destroy
     respond_to do |format|
       format.html { redirect_to transactions_url }
       format.json { head :no_content }
