@@ -25,7 +25,7 @@
       </div>
       <div class="col-xs-6 col-sm-2 placeholder"><p><strong>Accounts</strong></p>
         <div>
-          <%= f.collection_select(:trantype_id, Trantype.user_trantypes(current_user.id), :id, :name,{:include_hidden => false},{:multiple => true, size: 10}) %>
+          <%= f.collection_select(:account_id, Account.user_accounts(current_user.id), :id, :name,{:include_hidden => false},{:multiple => true, size: 10}) %>
         </div>
       </div>
 

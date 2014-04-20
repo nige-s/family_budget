@@ -21,6 +21,8 @@
   <%= f.hidden_field :user_id, :value => @transaction.user_id %> 
   <% end %>
  
+<%= f.hidden_field :sign, :value => "debit" %>
+
      <div class="control-group">
     <%= f.label :tran_date, :class => 'control-label' %>
     <div class="controls">
@@ -28,9 +30,9 @@
     </div>
    </div>
    <div class="control-group">
-    <%= f.label :trantype_id, :class => 'control-label' %>
+    <%= f.label "Account", :class => 'control-label' %>
     <div class="controls">
-    <%= f.collection_select(:trantype_id, Trantype.user_trantypes(current_user.id), :id, :name,:include_blank => 'Select a type') %>
+    <%= f.collection_select(:account_id, Account.user_accounts(current_user.id), :id, :name,:include_blank => 'Select an Account') %>
   </div>
   </div>
    <div class="control-group">

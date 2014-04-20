@@ -40,7 +40,7 @@ class ReportsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def transaction_params
   	if params[:report]
-      params.require(:report).permit(:user_id, :sdate, :edate, :range, :sign, :description, :supplier, :amount, :category_id => [], :trantype_id => []) 
+      params.require(:report).permit(:user_id, :sdate, :edate, :range, :sign, :description, :supplier, :amount, :category_id => [], :account_id => []) 
 	else
 	  nil
 	end

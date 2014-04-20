@@ -8,8 +8,8 @@
   <dd><%= User.find(@transaction.user_id).name || @transaction.user_id %></dd>
   <dt><strong><%= model_class.human_attribute_name(:tran_date) %>:</strong></dt>
   <dd><%= @transaction.tran_date %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:trantype_id) %>:</strong></dt>
-  <dd><%= Trantype.find(@transaction.trantype_id).name ||  @transaction.trantype_id  %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:account_id) %>:</strong></dt>
+  <dd><%= Account.find(@transaction.account_id).name ||  @transaction.trantype_id  %></dd>
   <dt><strong><%= model_class.human_attribute_name(:category_id) %>:</strong></dt>
   <dd><%= Category.find(@transaction.category_id).name || @transaction.category_id %></dd>
   <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>

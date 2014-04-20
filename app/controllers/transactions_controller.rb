@@ -63,6 +63,7 @@ end
   # DELETE /transactions/1
   # DELETE /transactions/1.json
   def destroy
+    @hit = true
     @transaction.destroy
     respond_to do |format|
       format.html { redirect_to transactions_url }
@@ -78,6 +79,6 @@ end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def transaction_params
-      params.require(:transaction).permit(:user_id, :tran_date, :trantype_id, :category_id, :description, :supplier, :amount)
+      params.require(:transaction).permit(:user_id, :tran_date, :account_id, :category_id, :description, :supplier, :amount,:sign)
     end
 end

@@ -5,7 +5,7 @@
 <%= form_for @statement, method: :get, :html => { :class => 'form-horizontal' } do |f| %>
   <div class="control-group">
     <div class="controls">
-    <%= f.collection_select(:acc_id, Account.all, :id, :name, :include_blank => 'Select an Account') %> 
+    <%= f.collection_select(:acc_id, Account.user_accounts(current_user.id), :id, :name, :include_blank => 'Select an Account') %> 
   </div>
 </div>
 <div class="control-group">
@@ -34,19 +34,19 @@
     </tr>
   </thead>
   <tbody>
-    <% @acc_transactions.each  do |account_transaction| %>
+    <% @acc_transactions.each  do |transaction| %>
       <tr>
-        <td><%= link_to account_transaction.id, account_transaction_path(account_transaction) %></td>
-        <td><%= Account.find(account_transaction.account_id).name %></td>
-        <td><%= account_transaction.tran_date %></td>
-        <td><%= account_transaction.description %></td>
-        <td><%= number_to_currency( account_transaction.amount, unit: '£') %></td>
-        <td><%= account_transaction.sign %></td>
+        <td><%= link_to transaction.id, transaction_path(transaction.id) %></td>
+        <td><%= Account.find(transaction.account_id).name %></td>
+        <td><%= transaction.tran_date %></td>
+        <td><%= transaction.description %></td>
+        <td><%= number_to_currency(transaction.amount, unit: '£') %></td>
+        <td><%= transaction.sign %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_account_transaction_path(account_transaction), :class => 'btn btn-mini' %>
+                      edit_transaction_path(transaction), :class => 'btn btn-mini' %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      account_transaction_path(account_transaction),
+                      transaction_path(transaction),
                       :method => :delete,
                       :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
                       :class => 'btn btn-mini btn-danger' %>
@@ -57,7 +57,7 @@
 </table>
 
 <%= link_to t('.new', :default => t("helpers.links.new")),
-            new_account_transaction_path,
+            new_transaction_path,
             :class => 'btn btn-primary' %>
 
 <% render 'partials/total', :params => {:total_title => 'Balance', :total_s =>  @acc_balance, :tran_count => @tran_count} %> 
