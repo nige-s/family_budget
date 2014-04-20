@@ -3,19 +3,22 @@ class ReportsController < ApplicationController
 
   def index
     if params[:first_button]
-    # Do stuff for first button submit
-    @report = Report.report_instance(transaction_params)
-      if params['report']
-        @trans = Report.filter_transactions(@report,@trans)
-      end
-    else
+      @report = Report.report_instance(transaction_params)
+    elsif params[:second_button]
       @report = Report.report_instance
     end
+    
+    @report ||= Report.report_instance(transaction_params)
+    if params['report']
+        @trans = Report.filter_transactions(@report,@trans)
+    end
+
     if @trans
       @tran_count = @trans.count
     else
       @trans = 0
     end
+
     @date_range = Report.date_range(@trans)
     @period = @date_range[:last_date] - @date_range[:first_date]
     @total = @trans.sum(:amount)
