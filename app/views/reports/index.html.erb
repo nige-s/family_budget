@@ -1,6 +1,6 @@
 <%- model_class = Report -%>
 <%= render 'form' %>
-<div class = "alert alert-success">Transaction date range: <strong> <%= @date_range[:first_date].to_s(:short) %></strong> to <strong><%= @date_range[:last_date].to_s(:short) %>(<%= distance_of_time_in_words(@date_range[:first_date],@date_range[:last_date]) %>). </strong>
+<div class = "alert alert-success">Actual transaction dates range from: <strong> <%= @date_range[:first_date].to_s(:short) %></strong> to <strong><%= @date_range[:last_date].to_s(:short) %>(<%= distance_of_time_in_words(@date_range[:first_date],@date_range[:last_date]) %>). </strong>
 </div>
 <table class="table table-striped">
   <thead>
