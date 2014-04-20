@@ -1,11 +1,18 @@
 class Transaction < ActiveRecord::Base
-  before_save :ensure_lowercase
-	belongs_to :trantype
+  before_save :ensure_lowercase, :correct_sign
+	belongs_to :account
 	belongs_to :user
 	belongs_to :category
 
   validates_presence_of :user_id
+  validates :sign, :inclusion => { :in => %w(debit credit),
+       :message => "%{value} is not a valid transaction type" }
 
+  def correct_sign
+    if sign == 'debit' 
+      self.amount = -(self.amount)
+    end
+  end
   def ensure_lowercase
     self.description = self.description.downcase
     self.supplier = self.supplier.downcase

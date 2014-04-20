@@ -1,5 +1,5 @@
 class Account < ActiveRecord::Base
-  has_many :account_transactions
+  has_many :transactions
   has_many :recurring_transactions
   
   has_many :users, :through => :account_holders
