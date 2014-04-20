@@ -2,9 +2,6 @@ class Report < ActiveRecord::Base
 has_many :categories, :primary_key => 'user_id', :foreign_key => 'user_id' 
   def after_initialize
     self.edate ||= Date.today if new_record?
-    self.amount ||= nil
-    self.description ||= nil
-    self.supplier ||= nil
   end
 
   def self.date_range(transactions)
@@ -19,19 +16,12 @@ has_many :categories, :primary_key => 'user_id', :foreign_key => 'user_id'
   def self.filter_transactions(report,trans)
     if report
       report.attributes.each do |key, val|
-      	if !val.blank?
-           if key == "category_id" || key == "trantype_id"
-              if (val.count == 1 && val[0] == "") || val.empty?
-              else
-                trans = trans.where(key => val) 
-              end
-            else 
-              if Report.columns_hash[key].type == :string
-                trans = trans.where("#{key} like ?","%#{val}%")
-              else
-                trans = trans.where(key => val) unless Report.columns_hash[key].type == :date
-              end
-           end      
+      	if !val.blank? 
+          if Report.columns_hash[key].type == :string
+            trans = trans.where("#{key} like ?","%#{val}%")
+          else
+            trans = trans.where(key => val) unless Report.columns_hash[key].type == :date
+          end    
       	end
       end
       trans =trans.where("tran_date >= ?", report.sdate).where("tran_date <= ?", report.edate).order('tran_date DESC')
@@ -39,7 +29,7 @@ has_many :categories, :primary_key => 'user_id', :foreign_key => 'user_id'
     trans
   end
 
-  def self.report_instance(transaction_params)
+  def self.report_instance(transaction_params=nil)
     if transaction_params
       report = Report.new(transaction_params)
       report.sdate = Date.today - 30 if report.sdate == nil

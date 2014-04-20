@@ -16,11 +16,11 @@
      </div>
   </div>
       <div class="col-xs-6 col-sm-2 placeholder"><p>Categories</p>
-        <%= f.collection_select(:category_id, Category.user_categories(current_user.id), :id, :name,{},{:multiple => true, size: Category.user_categories(current_user.id).count}) %>
+        <%= f.collection_select(:category_id, Category.user_categories(current_user.id), :id, :name,{:include_blank => "Choose Category(s)",:include_hidden => false},{:multiple => true, size: Category.user_categories(current_user.id).count}) %>
       </div>
       <div class="col-xs-6 col-sm-2 placeholder"><p>Transaction Types</p>
         <div>
-          <%= f.collection_select(:trantype_id, Trantype.user_trantypes(current_user.id), :id, :name,{},{:multiple => true, size: Trantype.user_trantypes(current_user.id).count}) %>
+          <%= f.collection_select(:trantype_id, Trantype.user_trantypes(current_user.id), :id, :name,{:include_blank => "Choose Account(s)",:include_hidden => false},{:multiple => true, size: Trantype.user_trantypes(current_user.id).count}) %>
         </div>
       </div>
 
@@ -47,8 +47,8 @@
          </div>
     </div> 
          <div>
-           <%= f.submit nil, :class => 'btn btn-primary' %>
-         </div>
-                      
+           <%= f.submit nil, :name => 'first_button', :class => 'btn btn-primary' %>
+           <%= f.submit "Reset Filters ", :name => 'second_button',:class => 'btn btn-primary'%> 
+                  </div> 
 
 <% end %>

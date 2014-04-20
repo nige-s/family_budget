@@ -1,15 +1,22 @@
 class Transaction < ActiveRecord::Base
+  before_save :ensure_lowercase
 	belongs_to :trantype
 	belongs_to :user
 	belongs_to :category
 
   validates_presence_of :user_id
-def self.user_transactions(curr_user)
-  if(curr_user.id == 1 || curr_user.id ==2)
-    Transaction.where(user_id: [1, 2]).order('tran_date DESC')
-  else
-    Transaction.where(user_id: curr_user.id).order('tran_date DESC')
+
+  def ensure_lowercase
+    self.description = self.description.downcase
+    self.supplier = self.supplier.downcase
   end
+
+  def self.user_transactions(curr_user)
+    if(curr_user.id == 1 || curr_user.id ==2)
+      Transaction.where(user_id: [1, 2]).order('tran_date DESC')
+    else
+      Transaction.where(user_id: curr_user.id).order('tran_date DESC')
+    end
 end
 
 def self.sum_transactions(transactions)

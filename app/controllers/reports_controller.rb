@@ -2,19 +2,31 @@ class ReportsController < ApplicationController
   before_action :user_transactions, only: [:index, :transactions_filter, :summary]
 
   def index
-    
-
+    if params[:first_button]
+    # Do stuff for first button submit
     @report = Report.report_instance(transaction_params)
-    if params['report']
-      @trans = Report.filter_transactions(@report,@trans)
+      if params['report']
+        @trans = Report.filter_transactions(@report,@trans)
+      end
+    else
+      @report = Report.report_instance
     end
-    @tran_count = @trans.count
+    if @trans
+      @tran_count = @trans.count
+    else
+      @trans = 0
+    end
     @date_range = Report.date_range(@trans)
     @period = @date_range[:last_date] - @date_range[:first_date]
     @total = @trans.sum(:amount)
     
     #required for pagination
     @trans = @trans.page params[:page]
+  end
+
+  def reset
+    @report = Report.report_instance
+    redirect_to action: 'index'
   end
 
   def summary
