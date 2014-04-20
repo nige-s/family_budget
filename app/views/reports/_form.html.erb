@@ -4,8 +4,8 @@
 
 
   <div class="row placeholders">
-    <div class="col-xs-6 col-sm-3 placeholder">
-     <div>User
+    <div class="col-xs-6 col-sm-3 placeholder"><p><strong>User and Date Range</strong></p>
+     <div>
        <p><%= f.collection_select(:user_id, User.all, :id, :name,:include_blank => 'Select a user') %></p>
      </div>
      <div>Start Date
@@ -20,16 +20,16 @@
                   </div> 
 
   </div>
-      <div class="col-xs-6 col-sm-2 placeholder"><p>Categories</p>
-        <%= f.collection_select(:category_id, Category.user_categories(current_user.id), :id, :name,{:include_blank => "Choose Category(s)",:include_hidden => false},{:multiple => true, size: Category.user_categories(current_user.id).count}) %>
+      <div class="col-xs-6 col-sm-2 placeholder"><p><strong>Categories</strong></p>
+        <%= f.collection_select(:category_id, Category.user_categories(current_user.id), :id, :name,{:include_hidden => false},{:multiple => true, size: 10}) %>
       </div>
-      <div class="col-xs-6 col-sm-2 placeholder"><p>Transaction Types</p>
+      <div class="col-xs-6 col-sm-2 placeholder"><p><strong>Accounts</strong></p>
         <div>
-          <%= f.collection_select(:trantype_id, Trantype.user_trantypes(current_user.id), :id, :name,{:include_blank => "Choose Account(s)",:include_hidden => false},{:multiple => true, size: Trantype.user_trantypes(current_user.id).count}) %>
+          <%= f.collection_select(:trantype_id, Trantype.user_trantypes(current_user.id), :id, :name,{:include_hidden => false},{:multiple => true, size: 10}) %>
         </div>
       </div>
 
-         <div class="col-xs-6 col-sm-2 placeholder">
+         <div class="col-xs-6 col-sm-2 placeholder"><p><strong>Text Search</strong></p>
            <div class="control-group">
              <%= f.label :description, :class => 'control-label' %>
               <div class="controls">
