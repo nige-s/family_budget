@@ -1,5 +1,5 @@
 class Transaction < ActiveRecord::Base
-  before_save :ensure_lowercase, :correct_sign
+  before_save :ensure_lowercase
 	belongs_to :account
 	belongs_to :user
 	belongs_to :category
