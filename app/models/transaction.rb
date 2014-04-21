@@ -14,8 +14,8 @@ class Transaction < ActiveRecord::Base
     end
   end
   def ensure_lowercase
-    self.description = self.description.downcase
-    self.supplier = self.supplier.downcase
+    self.description = self.description.downcase unless self.description.blank?
+    self.supplier = self.supplier.downcase unless self.supplier.blank?
   end
 
   def self.user_transactions(curr_user)

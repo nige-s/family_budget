@@ -3,8 +3,8 @@ BudgetPlanner::Application.routes.draw do
   resources :statements, only: [:index]
 
   resources :recurring_transactions
-  resources :account_transactions
 
+  
   match 'accounts/:id/statement', to: 'accounts#statement', as: 'account_statement', via: [:get, :post]
   resources :accounts
 
@@ -18,11 +18,7 @@ BudgetPlanner::Application.routes.draw do
   resources :trantypes do
     resources :transactions, only: [:index]
   end
-
-  resources :users do
-    resources :transactions, only: [:index]
-  end
-
+  get '/transactions/deposit'
   resources :transactions 
 
   get '/reports/summary'

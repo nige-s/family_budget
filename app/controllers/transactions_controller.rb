@@ -20,6 +20,10 @@ end
   def show
   end
 
+  def deposit
+    @transaction = Transaction.new
+  end
+
   # GET /transactions/new
   def new
     @transaction = Transaction.new
