@@ -6,8 +6,7 @@
              <p><%= f.collection_select(:user_id, User.all, :id, :name,:include_blank => 'Select a user') %></p>
            </div>
              <div>Start Date
-               
-                <%= f.text_field :sdate, 'data-behaviour' => 'datepicker' %>
+                <p><%= f.date_select :sdate %></p>
              </div>
                <div>End Date
                  <p><%= f.date_select :edate %></p>
