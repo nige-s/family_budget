@@ -7,6 +7,7 @@ class StatementsController < ApplicationController
     @statement = Statement.new(statement_params)
     @acc_transactions = Account.find(@statement.acc_id).transactions.where("tran_date <= ?", @statement.edate)
     @acc_balance = Statement.account_balance(@statement)
+    
     @balance = @acc_balance[:start_balance] + (@acc_balance[:credits] - @acc_balance[:debits])
   end
 
