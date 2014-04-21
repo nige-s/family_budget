@@ -20,8 +20,10 @@ class Transaction < ActiveRecord::Base
 
   def self.user_transactions(curr_user)
     if(curr_user.id == 1 || curr_user.id ==2)
-      Transaction.where(user_id: [1, 2]).order('tran_date DESC')
+      categories = User.find(1).categories
+      Transaction.where(user_id: [1, 2]).where(category_id: categories).order('tran_date DESC')
     else
+      categories = User.find(curr_user.id).where(category_id: categories).categories
       Transaction.where(user_id: curr_user.id).order('tran_date DESC')
     end
 end

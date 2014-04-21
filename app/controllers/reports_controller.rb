@@ -34,6 +34,7 @@ class ReportsController < ApplicationController
 
   def summary
     @report = Report.report_instance(transaction_params)
+    @report.user_id ||= current_user.id
     @summary = Report.category_sums(transaction_params,@trans,@report)
     @total = @trans.sum(:amount)
   end

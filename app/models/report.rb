@@ -42,9 +42,15 @@ has_many :categories, :primary_key => 'user_id', :foreign_key => 'user_id'
     return report
   end
 
+  def self.totals(report)
+
+
+  end
+
   def self.category_sums(transaction_params,trans,report)
 
-    cats = Category.all
+    user = User.find(report.user_id)
+    cats = user.categories
     summary = {}
     total = 0.0
     sub_total = 0.0
