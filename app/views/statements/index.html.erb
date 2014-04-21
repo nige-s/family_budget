@@ -1,7 +1,13 @@
 <%- model_class = Statement -%>
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
-</div>
+</div>Start balance: 
+<%= @acc_balance[:start_balance] %>
+<p>Credits: 
+<%= @acc_balance[:credits] %></p>
+<p>Debits: 
+<%= @acc_balance[:debits] %></p>
+
 <%= form_for @statement, method: :get, :html => { :class => 'form-horizontal' } do |f| %>
   <div class="control-group">
     <div class="controls">
@@ -18,9 +24,6 @@
     <%= f.submit 'Create Statement', :class => 'btn btn-primary' %>   
   </div>
 <% end %> 
-
-
-
 <table class="table table-striped">
   <thead>
     <tr>
@@ -60,5 +63,5 @@
             new_transaction_path,
             :class => 'btn btn-primary' %>
 
-<% render 'partials/total', :params => {:total_title => 'Balance', :total_s =>  @acc_balance, :tran_count => @tran_count} %> 
+<% render 'partials/total', :params => {:total_title => 'Balance', :total_s =>  @balance, :tran_count => @tran_count} %> 
 

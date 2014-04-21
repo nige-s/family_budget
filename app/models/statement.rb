@@ -5,8 +5,8 @@ class Statement < ActiveRecord::Base
   end
 	def self.account_balance(statement)
 	  tmp_account = Account.find(statement.acc_id)
-	  tmp_account.starting_balance + 
-	    (tmp_account.transactions.where("tran_date <= ?", statement.edate).where(sign: "credit").sum(:amount) -
-	     tmp_account.transactions.where("tran_date <= ?", statement.edate).where(sign: "debit").sum(:amount))
+	  {start_balance: tmp_account.starting_balance, 
+	   credits: tmp_account.transactions.where("tran_date <= ?", statement.edate).where(sign: "credit").sum(:amount),
+	   debits: tmp_account.transactions.where("tran_date <= ?", statement.edate).where(sign: "debit").sum(:amount)}
 	end
 end
