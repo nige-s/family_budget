@@ -1,4 +1,5 @@
 class TransactionsController < ApplicationController
+  layout "application"
   skip_before_action :authenticate_user!
   before_action :set_transaction, only: [:show, :edit, :update, :destroy]
   before_action :check_auth

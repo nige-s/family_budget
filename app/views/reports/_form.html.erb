@@ -15,11 +15,13 @@
         </div>
 
       <div class="col-xs-6 col-sm-3 placeholder"><p><strong>Categories</strong></p>
-        <%= f.collection_select(:category_id, Category.user_categories(current_user.id), :id, :name,{:include_hidden => false},{:multiple => true, size: 14}) %>
+         <% @acc_count = Account.user_accounts(current_user.id).count %>
+        <%= f.collection_select(:category_id, Category.user_categories(current_user.id), :id, :name,{:include_hidden => false},{:multiple => true, size: @acc_count}) %>
       </div>
       <div class="col-xs-6 col-sm-2 placeholder"><p><strong>Accounts</strong></p>
         <div>
-          <%= f.collection_select(:account_id, Account.user_accounts(current_user.id), :id, :name,{:include_hidden => false},{:multiple => true, size: 14}) %>
+
+          <%= f.collection_select(:account_id, Account.user_accounts(current_user.id), :id, :name,{:include_hidden => false},{:multiple => true, size: @acc_count}) %>
         </div>
       </div>
        <div class="col-xs-6 col-sm-4 placeholder"><p><strong>Text Search</strong></p>

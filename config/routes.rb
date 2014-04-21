@@ -15,9 +15,6 @@ BudgetPlanner::Application.routes.draw do
     resources :transactions, only: [:index]
   end
 
-  resources :trantypes do
-    resources :transactions, only: [:index]
-  end
   get '/transactions/deposit'
   resources :transactions 
 
