@@ -21,7 +21,7 @@ end
   end
 
   def deposit
-    @transaction = Transaction.new
+    @transaction = Transaction.new(user_id: current_user.id)
   end
 
   # GET /transactions/new

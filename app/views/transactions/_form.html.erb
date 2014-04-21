@@ -14,7 +14,7 @@
    <div class="control-group">
      <%= f.label "User", :class => 'control-label' %>
      <div class="controls">
-    <%= f.collection_select(:user_id, User.all, :id, :name,:include_blank => 'Please Select a user') %>
+    <%= f.collection_select(:user_id, User.all, :id, :name,:include_blank => 'Select a user') %>
      </div>
    </div>
   <% else %>
