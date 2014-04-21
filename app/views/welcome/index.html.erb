@@ -43,10 +43,12 @@
 
           <div class="inner cover">
             <h1 class="cover-heading">Budget Planner</h1>
-            <p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.</p>
-            <p class="lead">
-              <a href="#" class="btn btn-lg btn-default">Sign in...</a>
-            </p>
+            <p class="lead">Welcome to budget planner. Use it to track and analyse your finances. First create an account. Then ste up your preferences like accounts and categories. Start entering income and expenditure via the '<i>new transaction</i> link on the sidebar</p>
+            <% unless user_signed_in? %>
+              <p>
+                <%= button_to "Sign in", { :action=>"create", :controller=>"devise/sessions"}, :class => 'btn btn-primary',method: "get" %>
+              </p>
+            <% end %>
           </div>
 
           <div class="mastfoot">
@@ -59,12 +61,5 @@
       </div>
 
     </div>
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="../../dist/js/bootstrap.min.js"></script>
-    <script src="../../assets/js/docs.min.js"></script>
   </body>
 </html>
