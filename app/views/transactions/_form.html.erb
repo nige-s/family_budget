@@ -21,7 +21,7 @@
     <%= f.hidden_field :user_id, :value => @transaction.user_id %> 
   <% end %>
  
-<%= f.hidden_field :sign, :value => params[:sign] %>
+<%= f.hidden_field :sign, :value => params[:sign] || 'debit' %>
 
      <div class="control-group">
     <%= f.label :tran_date, :class => 'control-label' %>
