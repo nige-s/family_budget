@@ -35,16 +35,16 @@
     <%= f.collection_select(:account_id, Account.user_accounts(current_user.id), :id, :name,:include_blank => 'Select an Account') %>
   </div>
   </div>
-      <% case params[:type] %>
-        <% when "user" %>
-          <div class="control-group">
+      
+        <% if params[:type] == 'account' %>
+               <%= f.hidden_field :category_id, :value => Category.where(group: "account" ).where(name: "DEPOSIT").first.id %>
+       <% else %>
+	       <div class="control-group">
             <%= f.label :category_id, :class => 'control-label' %>
             <div class="controls">
               <%= f.collection_select(:category_id, Category.user_categories(current_user.id), :id, :name,:include_blank => 'Select a category') %>
                </div>
              </div>
-              <% when "account" %>
-               <%= f.hidden_field :category_id, :value => Category.where(group: "account" ).where(name: "DEPOSIT").first.id %>
 <% end %>
    <div class="control-group">
     <%= f.label :description, :class => 'control-label' %>
