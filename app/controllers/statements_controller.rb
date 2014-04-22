@@ -5,7 +5,7 @@ class StatementsController < ApplicationController
   # GET /statements.json
   def index
     @statement = Statement.new(statement_params)
-    @acc_transactions = Account.find(@statement.acc_id).transactions.where("tran_date <= ?", @statement.edate)
+    @acc_transactions = Account.find(@statement.acc_id).transactions.where("tran_date <= ?", @statement.edate).order('tran_date DESC')
     @acc_balance = Statement.account_balance(@statement)
     
     @balance = @acc_balance[:start_balance] + (@acc_balance[:credits] - @acc_balance[:debits])
