@@ -15,7 +15,9 @@ end
     @total = Transaction.sum_transactions(@transactions) 
     @transactions = @transactions.page params[:page]
   end
-
+  def edit_deposit
+    @transaction = Transaction.find(params[:id])
+  end
   # GET /transactions/1
   # GET /transactions/1.json
   def show

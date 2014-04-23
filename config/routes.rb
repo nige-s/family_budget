@@ -14,7 +14,7 @@ BudgetPlanner::Application.routes.draw do
   resources :categories do
     resources :transactions, only: [:index]
   end
-
+  get 'transactions/:id/edit_deposit', to: 'transactions#edit_deposit', as: 'edit_deposit_transaction'
   get '/transactions/deposit'
   resources :transactions 
 

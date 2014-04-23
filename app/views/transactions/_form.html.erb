@@ -11,17 +11,18 @@
     </div>
   <% end %>
   <% if (current_user.id == 1 || current_user.id == 2) %>
-   <div class="control-group">
+    <% @transaction.user_id ||= 1 %>
+     <div class="control-group">
      <%= f.label "User", :class => 'control-label' %>
      <div class="controls">
     <%= f.collection_select(:user_id, User.all, :id, :name,:include_blank => 'Select a user') %>
      </div>
    </div>
   <% else %>
-    <%= f.hidden_field :user_id, :value => @transaction.user_id %> 
+    <%= f.hidden_field :user_id, :value => @transaction.user_id || params[:transaction][:user_id] %> 
   <% end %>
  
-<%= f.hidden_field :sign, :value => params[:sign] || 'debit' %>
+ <%= f.hidden_field :sign, :value => @transaction.sign || params[:sign]  %>
 
      <div class="control-group">
     <%= f.label :tran_date, :class => 'control-label' %>
