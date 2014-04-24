@@ -10,6 +10,7 @@
       <th><%= model_class.human_attribute_name(:interval) %></th>
       <th><%= model_class.human_attribute_name(:day) %></th>
       <th><%= model_class.human_attribute_name(:description) %></th>
+      <th><%= model_class.human_attribute_name(:category_id) %></th>
       <th><%= model_class.human_attribute_name(:amount) %></th>
       <th><%= model_class.human_attribute_name(:sign) %></th>
       <th><%= model_class.human_attribute_name(:active) %></th>
@@ -26,7 +27,12 @@
         <td><%= Account.find(recurring_transaction.account_id).name %></td>
         <td><%= recurring_transaction.interval %></td>
         <td><%= recurring_transaction.day %></td>
-        <td><%= recurring_transaction.description %></td>
+	<td><%= recurring_transaction.description %></td>
+	<% if recurring_transaction.category_id %>
+		<td><%= Category.find(recurring_transaction.category_id).name %></td>
+	<% else %>
+		<td>N/A</td>
+        <% end %>
         <td><%= number_to_currency( recurring_transaction.amount, unit: '£') %></td>
         <td><%= recurring_transaction.sign %></td>
         <td><%= recurring_transaction.active %></td>

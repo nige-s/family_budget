@@ -10,6 +10,8 @@
   <dd><%= @recurring_transaction.interval %></dd>
   <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
   <dd><%= @recurring_transaction.description %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:category_id) %>:</strong></dt>
+  <dd><%= Category.find(@recurring_transaction.category_id).name %></dd>
   <dt><strong><%= model_class.human_attribute_name(:amount) %>:</strong></dt>
   <dd><%= @recurring_transaction.amount %></dd>
   <dt><strong><%= model_class.human_attribute_name(:sign) %>:</strong></dt>

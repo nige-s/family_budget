@@ -69,6 +69,6 @@ class RecurringTransactionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def recurring_transaction_params
-      params.require(:recurring_transaction).permit(:account_id, :interval, :description, :amount, :sign, :active, :start_date, :end_date, :last_updated, :day)
+      params.require(:recurring_transaction).permit(:account_id, :interval, :description, :amount, :sign, :active, :start_date, :end_date, :last_updated, :day, :category_id)
     end
 end
