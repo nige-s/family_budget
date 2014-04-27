@@ -1,8 +1,5 @@
 BudgetPlanner::Application.routes.draw do
  
-  resources :statements, only: [:index]
-
-  resources :recurring_transactions
 
   
   match 'accounts/:id/statement', to: 'accounts#statement', as: 'account_statement', via: [:get, :post]
@@ -21,6 +18,10 @@ BudgetPlanner::Application.routes.draw do
   get '/reports/summary'
   get 'reports/reset'
   resources :reports, only: [:index]
+  
+  resources :statements, only: [:index]
+  get  '/recurring_transactions/process_recurring', to: 'recurring_transactions#process_recurring', as: 'process_recurring'
+  resources :recurring_transactions
 
   root to: "welcome#index"
 

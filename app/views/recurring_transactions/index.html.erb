@@ -52,7 +52,7 @@
     <% end %>
   </tbody>
 </table>
-
+<%= link_to "Run recurring", process_recurring_path, :class => 'btn btn-primary' %>
 <%= link_to t('.new', :default => t("helpers.links.new")),
             new_recurring_transaction_path,
             :class => 'btn btn-primary' %>

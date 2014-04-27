@@ -1,5 +1,5 @@
 class RecurringTransactionsController < ApplicationController
-  before_action :set_recurring_transaction, only: [:show, :edit, :update, :destroy]
+ # before_action :set_recurring_transaction, only: [:show, :edit, :update, :destroy]
 
   # GET /recurring_transactions
   # GET /recurring_transactions.json
@@ -58,6 +58,15 @@ class RecurringTransactionsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to recurring_transactions_url }
       format.json { head :no_content }
+    end
+  end
+  def process_recurring
+	  @p = "bollox!"
+    if params[:account].present?
+		    @p = "Acc: #{params[:account][:account_id]} SDate: #{params[:account][:start_date]} EDate: #{params[:account][:end_date]}" 
+	  	    RecurringTransaction.process_recurring(sdate: params[:account][:start_date],
+					     edate: params[:account][:end_date], 
+					     account_id: params[:account][:account_id]) 
     end
   end
 

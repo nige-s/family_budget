@@ -1,0 +1,24 @@
+<%= form_tag({ controller: "recurring_transactions", action: "process_recurring"}, method: :get, :class => 'form-horizontal') %>
+<%= @p %>
+
+<div class="control-group">
+     Account
+    <div class="controls">
+	    <%= collection_select(:account, :account_id, Account.user_accounts(current_user.id),:id, :name, :include_blank => 'Select Account') %>
+    </div>
+  </div>
+  <div class="control-group">
+   Start date
+    <div class="controls">
+      <%= text_field :account, :start_date %>
+    </div>
+  </div>
+  <div class="control-group">
+    End date
+    <div class="controls">
+      <%= text_field :account,:end_date %>
+    </div>
+  </div>
+  <div class="form-actions">
+                <%= button_to 'Process Recurring', :class => 'btn btn-primary' %>
+  </div>
