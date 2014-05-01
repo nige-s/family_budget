@@ -1,5 +1,5 @@
 class RecurringTransactionsController < ApplicationController
- # before_action :set_recurring_transaction, only: [:show, :edit, :update, :destroy]
+  before_action :set_recurring_transaction, only: [:show, :edit, :update, :destroy]
 
   # GET /recurring_transactions
   # GET /recurring_transactions.json
