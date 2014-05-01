@@ -14,11 +14,8 @@ class RecurringTransaction < ActiveRecord::Base
     recurring_trans = RecurringTransaction.where(active: true).where(account_id: account_id).where('start_date >= ?', start_date)
    
     (start_date..end_date).each do |c_date|
-     # date = c_date.split('/')  
-      puts "day #{c_date.day}"
-	    todo_today = recurring_trans.where(day: c_date.day)
-      #edate = end_date.split('/')
-     #mydate = DateTime.parse(end_date)
+      todo_today = recurring_trans.where(day: c_date.day)
+      
       todo_today.each do |recurr_tran|
         t = Transaction.where(tran_date: c_date).where(amount: recurr_tran.amount).where(description: recurr_tran.description)
 	@date_until = recurr_tran.end_date || nil

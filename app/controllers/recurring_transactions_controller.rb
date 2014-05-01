@@ -61,9 +61,7 @@ class RecurringTransactionsController < ApplicationController
     end
   end
   def process_recurring
-	  @p = "bollox!"
     if params[:account].present?
-		    @p = "Acc: #{params[:account][:account_id]} SDate: #{params[:account][:start_date]} EDate: #{params[:account][:end_date]}" 
 	  	    RecurringTransaction.process_recurring(sdate: params[:account][:start_date],
 					     edate: params[:account][:end_date], 
 					     account_id: params[:account][:account_id]) 
