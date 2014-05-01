@@ -26,6 +26,7 @@
       <th><%= model_class.human_attribute_name(:account_id) %></th>
       <th><%= model_class.human_attribute_name(:tran_date) %></th>
       <th><%= model_class.human_attribute_name(:description) %></th>
+      <th><%= model_class.human_attribute_name(:category_id) %></th>
       <th><%= model_class.human_attribute_name(:amount) %></th>
       <th><%= "Credit/Debit" %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
@@ -38,6 +39,7 @@
         <td><%= Account.find(transaction.account_id).name %></td>
         <td><%= transaction.tran_date %></td>
         <td><%= transaction.description %></td>
+        <td><%= Category.find(transaction.category_id).name %></td>
         <td><%= number_to_currency(transaction.amount, unit: '£') %></td>
         <td><%= transaction.sign %></td>
         <% if transaction.sign == 'credit' %>

@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  src_account_id: 1
+  target_account_id: 1
+  tran_date: 2014-05-01
+  amount: 9.99
+  description: MyString
+  src_user_id: 1
+  target_user_id: 1
+
+two:
+  src_account_id: 1
+  target_account_id: 1
+  tran_date: 2014-05-01
+  amount: 9.99
+  description: MyString
+  src_user_id: 1
+  target_user_id: 1

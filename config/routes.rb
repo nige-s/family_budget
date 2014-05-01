@@ -2,6 +2,8 @@ BudgetPlanner::Application.routes.draw do
  
 
   
+  resources :bank_transfers
+
   match 'accounts/:id/statement', to: 'accounts#statement', as: 'account_statement', via: [:get, :post]
   resources :accounts
 

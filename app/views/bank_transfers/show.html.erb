@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Src account:</strong>
+  <%= @bank_transfer.src_account_id %>
+</p>
+
+<p>
+  <strong>Target account:</strong>
+  <%= @bank_transfer.target_account_id %>
+</p>
+
+<p>
+  <strong>Tran date:</strong>
+  <%= @bank_transfer.tran_date %>
+</p>
+
+<p>
+  <strong>Amount:</strong>
+  <%= @bank_transfer.amount %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @bank_transfer.description %>
+</p>
+
+<p>
+  <strong>Src user:</strong>
+  <%= @bank_transfer.src_user_id %>
+</p>
+
+<p>
+  <strong>Target user:</strong>
+  <%= @bank_transfer.target_user_id %>
+</p>
+
+<%= link_to 'Edit', edit_bank_transfer_path(@bank_transfer) %> |
+<%= link_to 'Back', bank_transfers_path %>
