@@ -1,6 +1,10 @@
-<h1>Listing bank_transfers</h1>
+<h1></h1>
+<%- model_class = BankTransfer -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => "Account Transfers" %></h1>
+</div>
 
-<table>
+<table class = "table table-striped">
   <thead>
     <tr>
       <th>Src account</th>
@@ -19,21 +23,24 @@
   <tbody>
     <% @bank_transfers.each do |bank_transfer| %>
       <tr>
-        <td><%= bank_transfer.src_account_id %></td>
-        <td><%= bank_transfer.target_account_id %></td>
+        <td><%= Account.find(bank_transfer.src_account_id) %></td>
+        <td><%= Account.find(bank_transfer.target_account_id) %></td>
         <td><%= bank_transfer.tran_date %></td>
         <td><%= bank_transfer.amount %></td>
         <td><%= bank_transfer.description %></td>
-        <td><%= bank_transfer.src_user_id %></td>
-        <td><%= bank_transfer.target_user_id %></td>
-        <td><%= link_to 'Show', bank_transfer %></td>
-        <td><%= link_to 'Edit', edit_bank_transfer_path(bank_transfer) %></td>
-        <td><%= link_to 'Destroy', bank_transfer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= User.find(bank_transfer.src_user_id) %></td>
+        <td><%= User.find(bank_transfer.target_user_id) %></td>
+        <td>
+          <%= link_to t('.show', :default => t("helpers.links.show")),  bank_transfer , :class => 'btn btn-mini' %>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),  edit_bank_transfer_path(bank_transfer) , :class => 'btn btn-mini' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      bank_transfer,
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-mini btn-danger' %>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Bank transfer', new_bank_transfer_path %>
+<%= link_to t('.new', :default => t("helpers.links.new")), new_category_path, :class => 'btn btn-primary' %>
