@@ -36,21 +36,25 @@
   </div>
 </div>
 
-
-
-  <div class="field">
+   <div class="control-group">
     <%= f.label :tran_date %><br>
+    <div class="controls">
     <%= f.date_select :tran_date %>
   </div>
-  <div class="field">
+</div>
+   <div class="control-group">
     <%= f.label :amount %><br>
+    <div class="controls">
     <%= f.text_field :amount %>
   </div>
-  <div class="field">
+</div>
+   <div class="control-group">
     <%= f.label :description %><br>
+    <div class="controls">
     <%= f.text_field :description %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+</div>
+ <div class="form-actions">
+    <%= f.submit :class => 'btn btn-primary' %>
   </div>
 <% end %>
