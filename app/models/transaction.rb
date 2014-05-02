@@ -4,7 +4,7 @@ class Transaction < ActiveRecord::Base
 	belongs_to :user
 	belongs_to :category
 
-  validates_presence_of :user_id
+  validates_presence_of :user_id, :category_id,:account_id,:amount, :sign
   validates :sign, :inclusion => { :in => %w(debit credit),
        :message => "%{value} is not a valid transaction type" }
 

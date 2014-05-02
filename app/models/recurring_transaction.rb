@@ -17,18 +17,9 @@ class RecurringTransaction < ActiveRecord::Base
       todo_today = recurring_trans.where(day: c_date.day)
       
       todo_today.each do |recurr_tran|
-        t = Transaction.where(tran_date: c_date).where(description: recurr_tran.description)
+        t = Transaction.where(tran_date: c_date).where(description: recurr_tran.description.downcase)
 	@date_until = recurr_tran.end_date || nil
-        if(@date_until.nil?)
-	  Transaction.create(account_id: recurr_tran.account_id,
-	               	     user_id: user_id,
-			     tran_date: c_date,
-			     category_id: recurr_tran.category_id,
-			     description: recurr_tran.description,
-			     amount: recurr_tran.amount,
-			     sign: recurr_tran.sign) if t.empty?   
-
-	elsif (recurr_tran.end_date >= end_date)
+        if(@date_until.nil? || recurr_tran.end_date >= end_date)
 	  Transaction.create(account_id: recurr_tran.account_id,
 	               	     user_id: user_id,
 			     tran_date: c_date,
@@ -38,7 +29,7 @@ class RecurringTransaction < ActiveRecord::Base
 			     sign: recurr_tran.sign) if t.empty?   
 
 	end
-	end
+      end
     end
   end
 end

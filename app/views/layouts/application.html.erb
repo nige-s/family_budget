@@ -86,7 +86,7 @@
               <li><%= link_to 'New Account', new_account_path %></li>
               <% if Account.count > 0 %>
               <li><%= link_to 'Make a Deposit', transactions_deposit_path %></li>
-              <li><%= link_to 'Statements', statements_path('statement' => {:acc_id => Account.first.id}) %></li>
+              <li><%= link_to 'Statements', statements_path('statement' => {:acc_id => User.find(current_user.id).accounts.first.id}) %></li>
               <% end %>
               
           </ul>
