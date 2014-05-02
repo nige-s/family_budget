@@ -23,7 +23,7 @@ class Transaction < ActiveRecord::Base
       categories = User.find(1).categories
       Transaction.where(user_id: [1, 2]).where(category_id: categories).order('tran_date DESC')
     else
-      categories = User.find(curr_user.id).where(category_id: categories).categories
+      categories = User.find(curr_user.id).categories
       Transaction.where(user_id: curr_user.id).order('tran_date DESC')
     end
 end
