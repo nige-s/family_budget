@@ -9,9 +9,9 @@ class ReportsController < ApplicationController
     end
     
     @report ||= Report.report_instance(transaction_params)
-    if params['report']
+#    if params['report']
         @trans = Report.filter_transactions(@report,@trans)
-    end
+ #   end
 
     if @trans
       @tran_count = @trans.count

@@ -24,9 +24,8 @@ has_many :categories, :primary_key => 'user_id', :foreign_key => 'user_id'
           end    
       	end
       end
-      trans =trans.where("tran_date >= ?", report.sdate).where("tran_date <= ?", report.edate).order('tran_date DESC')
     end
-    trans
+      trans =trans.where("tran_date >= ?", report.sdate).where("tran_date <= ?", report.edate).order('tran_date DESC')
   end
 
   def self.report_instance(transaction_params=nil)
