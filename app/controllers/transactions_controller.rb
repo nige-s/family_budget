@@ -4,6 +4,9 @@ class TransactionsController < ApplicationController
   before_action :set_transaction, only: [:show, :edit, :update, :destroy]
   before_action :check_auth
 
+  def authourise
+    # @authourised = Account.owns_account?(current_user.id,params[:id])
+  end
 def check_auth
   redirect_to :welcome => :index unless user_signed_in?   
 end  

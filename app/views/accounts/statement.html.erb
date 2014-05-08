@@ -2,6 +2,7 @@
 <div class="page-header">
   <h1><%=t Account.find(params[:id]).name %> Account - Transactions</h1>
 </div>
+<% if @authourised %>
 <%= @account.id %>
 <%= form_for @account, :url => account_statement_path(), :html => { :class => 'form-horizontal' }, method: :post do |f| %>
   <div class="control-group">
@@ -48,5 +49,7 @@
     <% end %>
   </tbody>
 </table>
-
+<% else %>
+  <h1>Not your Account! </h1>
+<% end %>
 

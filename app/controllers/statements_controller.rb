@@ -1,14 +1,18 @@
 class StatementsController < ApplicationController
-  before_action :set_statement, only: [:show, :edit, :update, :destroy]
-
+  before_action  :set_statement, only: [:show, :edit, :update, :destroy]
+ 
+  def authourise
+     @authourised = authourise_resource(resource: 'account', user_id: current_user.id, account_id: statement_params[:acc_id])
+  end
   # GET /statements
   # GET /statements.json
   def index
-    @statement = Statement.new(statement_params)
-    @acc_transactions = Account.find(@statement.acc_id).transactions.where("tran_date <= ?", @statement.edate).order('tran_date DESC')
-    @acc_balance = Statement.account_balance(@statement)
-    
-    @balance = @acc_balance[:start_balance] + (@acc_balance[:credits] - @acc_balance[:debits])
+    if @authourised
+      @statement = Statement.new(statement_params)
+      @acc_transactions = Account.find(@statement.acc_id).transactions.where("tran_date <= ?", @statement.edate).order('tran_date DESC')
+      @acc_balance = Statement.account_balance(@statement)
+      @balance = @acc_balance[:start_balance] + (@acc_balance[:credits] - @acc_balance[:debits])
+    end
   end
 
   # GET /statements/1
@@ -66,13 +70,13 @@ class StatementsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_statement
-      @statement = Statement.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_statement
+    @statement = Statement.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def statement_params
-      params.require(:statement).permit(:acc_id, :edate)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def statement_params
+    params.require(:statement).permit(:acc_id, :edate)
+  end
 end

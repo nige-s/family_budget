@@ -1,6 +1,9 @@
 class BankTransfersController < ApplicationController
-  before_action :set_bank_transfer, only: [:show, :edit, :update, :destroy]
+  before_action :owns_account?, :set_bank_transfer, only: [:show, :edit, :update, :destroy]
 
+  def owns_account?
+    @authourised =  Account.owns_account?(current_user.id,params[:account_id])
+  end
   # GET /bank_transfers
   # GET /bank_transfers.json
   def index

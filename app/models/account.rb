@@ -11,6 +11,10 @@ class Account < ActiveRecord::Base
     ah.each do |acc|
       accounts << Account.find(acc.account_id)
     end
-    return accounts
+    accounts
+  end
+
+  def self.owns_account?(user_id,account_id)
+    User.find(user_id).accounts.where(id: account_id).size > 0
   end
 end

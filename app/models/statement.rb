@@ -12,4 +12,5 @@ class Statement < ActiveRecord::Base
 	   credits: cred,
 	   debits: deb}
 	end
+
 end

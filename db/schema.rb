@@ -24,16 +24,6 @@ ActiveRecord::Schema.define(version: 20140501121916) do
     t.datetime "updated_at"
   end
 
-  create_table "account_transactions", force: true do |t|
-    t.integer  "account_id"
-    t.date     "tran_date"
-    t.string   "description"
-    t.decimal  "amount"
-    t.string   "sign"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "accounts", force: true do |t|
     t.string   "name"
     t.decimal  "starting_balance"
@@ -58,7 +48,6 @@ ActiveRecord::Schema.define(version: 20140501121916) do
     t.string   "desc"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "user_id"
     t.string   "group",      default: "user"
   end
 
@@ -111,14 +100,6 @@ ActiveRecord::Schema.define(version: 20140501121916) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "sign"
-  end
-
-  create_table "trantypes", force: true do |t|
-    t.string   "name"
-    t.string   "desc"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "user_id"
   end
 
   create_table "users", force: true do |t|

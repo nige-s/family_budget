@@ -1,5 +1,11 @@
 <%- model_class = Account -%>
 <div class="page-header">
+<% if @authourised %>
   <h1><%=t '.title', :default => [:'helpers.titles.edit', 'Edit %{model}'], :model => model_class.model_name.human.titleize %></h1>
 </div>
 <%= render :partial => 'form' %>
+<% else %>
+  <h1>Not your Account! </h1>
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              accounts_path, :class => 'btn'  %>
+  <% end %>

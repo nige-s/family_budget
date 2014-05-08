@@ -1,10 +1,10 @@
 class AccountsController < ApplicationController
-  before_action :set_account, only: [:show, :edit, :update, :destroy]
+  before_action  :set_account, only: [:show, :edit, :update, :destroy]
 
   # GET /accounts
   # GET /accounts.json
   def index
-    @accounts = Account.user_accounts(current_user.id)
+    @accounts = current_user.accounts
   end
 
   # GET /accounts/1
@@ -12,7 +12,7 @@ class AccountsController < ApplicationController
   def show
   end
   def statement
-    @account = Account.find(params[:id])
+    @account = current_user.accounts.where(account_id:params[:id])
   end
   # GET /accounts/new
   def new
@@ -67,7 +67,7 @@ class AccountsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_account
-      @account = Account.find(params[:id])
+      @account = current_user.accounts.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

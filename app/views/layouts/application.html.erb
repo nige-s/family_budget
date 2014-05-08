@@ -86,8 +86,10 @@
               <li><%= link_to 'New Account', new_account_path %></li>
               <% if Account.count > 0 %>
               <li><%= link_to 'Make a Deposit', transactions_deposit_path %></li>
+              <% if User.find(current_user.id).accounts.size > 0 %>
               <li><%= link_to 'Statements', statements_path('statement' => {:acc_id => User.find(current_user.id).accounts.first.id}) %></li>
-              <% end %>
+            <% end %>
+       <% end %>
               
           </ul>
           <ul class="nav nav-sidebar">
@@ -106,7 +108,9 @@
 
               <% end %>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-        
+          <%= @controller_from_appc %>
+          <%= @action_from_appc %>
+          <%= @params_from_appc %>
 
             <%= yield %>
       </div>

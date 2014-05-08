@@ -1,12 +1,12 @@
 class Transaction < ActiveRecord::Base
   before_save :ensure_lowercase
-	belongs_to :account
-	belongs_to :user
-	belongs_to :category
+  belongs_to :account
+  belongs_to :user
+  belongs_to :category
 
   validates_presence_of :user_id, :category_id,:account_id,:amount, :sign
   validates :sign, :inclusion => { :in => %w(debit credit),
-       :message => "%{value} is not a valid transaction type" }
+    :message => "%{value} is not a valid transaction type" }
 
   def correct_sign
     if sign == 'debit' && self.amount >= 0
@@ -26,10 +26,10 @@ class Transaction < ActiveRecord::Base
       categories = User.find(curr_user.id).categories
       Transaction.where(user_id: curr_user.id).order('tran_date DESC')
     end
-end
+  end
 
-def self.sum_transactions(transactions)
-  transactions.sum(:amount)
-end
-	#paginates_per 10
+  def self.sum_transactions(transactions)
+    transactions.sum(:amount)
+  end
+  #paginates_per 10
 end
