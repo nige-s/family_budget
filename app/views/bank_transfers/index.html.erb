@@ -22,13 +22,13 @@
   <tbody>
     <% @bank_transfers.each do |bank_transfer| %>
       <tr>
+        <td><%= link_to bank_transfer.id, bank_transfer_path(bank_transfer.id) %></td>
         <td><%= Account.find(bank_transfer.src_account_id).name %></td>
         <td><%= Account.find(bank_transfer.target_account_id).name %></td>
         <td><%= bank_transfer.tran_date %></td>
         <td><%= bank_transfer.amount %></td>
         <td><%= bank_transfer.description %></td>
         <td><%= User.find(bank_transfer.src_user_id).name%></td>
-        <td><%= User.find(bank_transfer.target_user_id).name %></td>
         <td>
           <%= link_to t('.show', :default => t("helpers.links.show")),  bank_transfer , :class => 'btn btn-mini' %>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),  edit_bank_transfer_path(bank_transfer) , :class => 'btn btn-mini' %>
@@ -42,4 +42,4 @@
     <% end %>
   </tbody>
 </table>
-<%= link_to t('.new', :default => t("helpers.links.new")), new_category_path, :class => 'btn btn-primary' %>
+<%= link_to t('.new', :default => t("helpers.links.new")), new_bank_transfer_path, :class => 'btn btn-primary' %>

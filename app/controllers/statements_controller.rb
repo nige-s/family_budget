@@ -1,18 +1,18 @@
 class StatementsController < ApplicationController
   before_action  :set_statement, only: [:show, :edit, :update, :destroy]
  
-  def authourise
-     @authourised = authourise_resource(resource: 'account', user_id: current_user.id, account_id: statement_params[:acc_id])
-  end
   # GET /statements
   # GET /statements.json
   def index
-    if @authourised
       @statement = Statement.new(statement_params)
-      @acc_transactions = Account.find(@statement.acc_id).transactions.where("tran_date <= ?", @statement.edate).order('tran_date DESC')
+      begin
+      @acc_transactions = current_user.accounts.find(@statement.acc_id).transactions.where("tran_date <= ?", @statement.edate).order('tran_date DESC')
       @acc_balance = Statement.account_balance(@statement)
       @balance = @acc_balance[:start_balance] + (@acc_balance[:credits] - @acc_balance[:debits])
-    end
+      rescue
+        flash[:error] = "Not authourised to view the account you attempted to access"
+        redirect_to transactions_path 
+      end
   end
 
   # GET /statements/1

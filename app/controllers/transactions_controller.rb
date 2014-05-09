@@ -7,9 +7,9 @@ class TransactionsController < ApplicationController
   def authourise
     # @authourised = Account.owns_account?(current_user.id,params[:id])
   end
-def check_auth
-  redirect_to :welcome => :index unless user_signed_in?   
-end  
+  def check_auth
+    redirect_to :welcome => :index unless user_signed_in?   
+  end  
   # GET /transactions
   # GET /transactions.json
   def index
@@ -81,13 +81,18 @@ end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_transaction
-      @transaction = Transaction.find(params[:id])
+  # Use callbacks to share common setup or constraints between actions.
+  def set_transaction
+    begin
+      @transaction = current_user.transactions.find(params[:id])
+    rescue
+      flash[:error] = "Not authourised to view the transaction you attempted to access"
+      redirect_to transactions_path
     end
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def transaction_params
-      params.require(:transaction).permit(:user_id, :tran_date, :account_id, :category_id, :description, :supplier, :amount,:sign)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def transaction_params
+    params.require(:transaction).permit(:user_id, :tran_date, :account_id, :category_id, :description, :supplier, :amount,:sign)
+  end
 end
