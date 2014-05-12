@@ -1,7 +1,8 @@
 class Account < ActiveRecord::Base
   has_many :transactions
   has_many :recurring_transactions
-  
+  has_many :users, :through => :bank_transfers
+  has_many :bank_transfers, :foreign_key => 'src_account_id'
   has_many :users, :through => :account_holders
   has_many :account_holders
 

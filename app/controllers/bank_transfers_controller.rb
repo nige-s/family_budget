@@ -68,7 +68,12 @@ class BankTransfersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_bank_transfer
-      @bank_transfer = BankTransfer.find(params[:id])
+      begin
+      @bank_transfer = current_user.bank_transfers.find(params[:id])
+      rescue
+        flash[:error] = "Not authourised to view the account transfer you are trying to access"
+        redirect_to bank_transfers_path
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
