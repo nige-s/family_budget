@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" hash="906596822">
+    <data-source source="LOCAL" name="Rails budget_planner: test" uuid="030da4da-f44d-4b66-aee0-7f311216cab7">
+      <driver-ref>postgresql</driver-ref>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql:DB_budget_test</jdbc-url>
+      <libraries />
+    </data-source>
+    <data-source source="LOCAL" name="Rails budget_planner: development" uuid="4fdd8380-2ecb-426c-a74d-1d823b966bea">
+      <driver-ref>postgresql</driver-ref>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql:DB_budget</jdbc-url>
+      <libraries />
+    </data-source>
+  </component>
+</project>
+
