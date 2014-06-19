@@ -4,7 +4,12 @@ class RecurringTransactionsController < ApplicationController
   # GET /recurring_transactions
   # GET /recurring_transactions.json
   def index
-    @recurring_transactions = RecurringTransaction.all
+    accounts = current_user.accounts
+    @recurring_transactions = RecurringTransaction.where(account_id: accounts)
+    @title = 'Total outgoings for main account'
+    @total  = Account.where(id: 1).first.recurring_transactions.where(sign: 'debit').sum(:amount)
+
+    @tran_count = Account.where(id: 1).first.recurring_transactions.where(sign: 'debit').count
   end
 
   # GET /recurring_transactions/1
