@@ -15,7 +15,7 @@ class RecurringTransaction < ActiveRecord::Base
     (start_date.month..end_date.month).each do |month|
       recurring_trans.each do |recurring_transaction|
         @date_until = recurring_transaction.end_date || nil
-        @curr_date = Date.parse("#{recurring_transaction.day}/#{month}/#{start_date.year}")
+        @curr_date = Date.parse("#{start_date.year}/#{month}/#{recurring_transaction.day}")
         puts @curr_date
         if(recurring_transaction_exists(recurring_transaction.id,month,start_date.year) == false && (@date_until.nil? || @date_until >= end_date) && recurring_transaction.start_date <= @curr_date)
 
