@@ -12,25 +12,40 @@ class RecurringTransaction < ActiveRecord::Base
     user_id = Account.find(account_id).users.first.id
     
     recurring_trans = RecurringTransaction.where(active: true).where(account_id: account_id).where('start_date >= ?', start_date)
-   
-    (start_date..end_date).each do |c_date|
-      todo_today = recurring_trans.where(day: c_date.day)
-      
-      todo_today.each do |recurr_tran|
-        t = Transaction.where(tran_date: c_date).where(description: recurr_tran.description.downcase)
-	@date_until = recurr_tran.end_date || nil
-        if(@date_until.nil? || recurr_tran.end_date >= end_date)
-	  Transaction.create(account_id: recurr_tran.account_id,
-	               	     user_id: user_id,
-			     tran_date: c_date,
-			     category_id: recurr_tran.category_id,
-			     description: recurr_tran.description,
-			     amount: recurr_tran.amount,
-			     sign: recurr_tran.sign) if t.empty?   
+    (start_date.month..end_date.month).each do |month|
+      recurring_trans.each do |recurring_transaction|
+        @date_until = recurring_transaction.end_date || nil
+        @curr_date = Date.parse("#{recurring_transaction.day}/#{month}/#{start_date.year}")
+        puts @curr_date
+        if(recurring_transaction_exists(recurring_transaction.id,month,start_date.year) == false && (@date_until.nil? || @date_until >= end_date) && recurring_transaction.start_date <= @curr_date)
 
-	end
+        Transaction.create(account_id: recurring_transaction.account_id,
+                       	   user_id: user_id,
+                           tran_date: @curr_date,
+                           category_id: recurring_transaction.category_id,
+                           description: recurring_transaction.description,
+                           amount: recurring_transaction.amount,
+                           sign: recurring_transaction.sign,
+                           recurring_trans_id: recurring_transaction.id)
+          recurring_transaction.last_updated = Date.today
+          recurring_transaction.save
+          end
       end
     end
   end
-end
+
+  def self.recurring_transaction_exists(id,month,year)
+    trans = Transaction.where(recurring_trans_id: id )
+    exists = false
+    if(trans.nil? == false)
+      trans.all.each do |tran|
+        if(tran.tran_date.month == month && tran.tran_date.year == year)
+          exists = true
+          break
+        end
+      end
+    end
+    exists
+  end
+  end
 
