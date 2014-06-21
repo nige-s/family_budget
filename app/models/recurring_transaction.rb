@@ -12,7 +12,6 @@ class RecurringTransaction < ActiveRecord::Base
     user_id = Account.find(account_id).users.first.id
     
     recurring_trans = RecurringTransaction.where(active: true).where(account_id: account_id).where(interval: 'monthly').where('start_date <= ?', start_date)
-    require 'pry';binding.pry
     (start_date.month..end_date.month).each do |month|
       recurring_trans.each do |recurring_transaction|
         @date_until = recurring_transaction.end_date || nil
@@ -39,7 +38,6 @@ class RecurringTransaction < ActiveRecord::Base
     exists = false
     if(trans.nil? == false)
       trans.all.each do |tran|
-        binding.pry
         if(tran.tran_date.month == month && tran.tran_date.year == year)
           exists = true
           break
