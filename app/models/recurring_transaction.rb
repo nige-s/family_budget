@@ -15,7 +15,11 @@ class RecurringTransaction < ActiveRecord::Base
     (start_date.month..end_date.month).each do |month|
       recurring_trans.each do |recurring_transaction|
         @date_until = recurring_transaction.end_date || nil
+        begin
         @curr_date = Date.strptime("#{recurring_transaction.day}/#{month}/#{start_date.year}", "%d/%m/%Y")
+        rescue
+          puts "INVALID DATE: #{recurring_transaction.day}/#{month}/#{start_date.year}"
+        end
         if(recurring_transaction_exists(recurring_transaction.id,month,start_date.year) == false && (@date_until.nil? || @date_until >= end_date) && recurring_transaction.start_date <= @curr_date)
 
         Transaction.create(account_id: recurring_transaction.account_id,
