@@ -37,7 +37,7 @@
       <tr>
         <td><%= link_to transaction.id, transaction_path(transaction.id) %></td>
         <td><%= Account.find(transaction.account_id).name %></td>
-        <td><%= transaction.tran_date %></td>
+        <td><%= transaction.tran_date.to_formatted_s(:d_m_Y) %></td>
         <td><%= transaction.description %></td>
         <td><%= Category.find(transaction.category_id).name %></td>
         <td><%= number_to_currency(transaction.amount, unit: '£') %></td>
