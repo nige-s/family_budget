@@ -28,6 +28,8 @@
       <th><%= model_class.human_attribute_name(:description) %></th>
       <th><%= model_class.human_attribute_name(:category_id) %></th>
       <th><%= model_class.human_attribute_name(:amount) %></th>
+      <th><%= model_class.human_attribute_name(:reconciled) %></th>
+      <th><%= model_class.human_attribute_name(:reconciled_date) %></th>
       <th><%= "Credit/Debit" %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
@@ -41,6 +43,13 @@
         <td><%= transaction.description %></td>
         <td><%= Category.find(transaction.category_id).name %></td>
         <td><%= number_to_currency(transaction.amount, unit: '£') %></td>
+        <% if transaction.reconciled %>
+          <td><strong><%= transaction.reconciled %></strong></td>
+        <%else%>
+          <td><%= transaction.reconciled %></td>
+        <% end%>
+
+        <td><%= transaction.reconciled_date %></td>
         <td><%= transaction.sign %></td>
         <% if transaction.sign == 'credit' %>
 	<td>

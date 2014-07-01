@@ -1,0 +1,40 @@
+<%- model_class = Transaction -%>
+<div class="page-header">
+<h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th><%= model_class.human_attribute_name(:id) %></th>
+    <th><%= model_class.human_attribute_name(:user_id) %></th>
+    <th><%= model_class.human_attribute_name(:tran_date) %></th>
+    <th><%= model_class.human_attribute_name(:account_id) %></th>
+    <th><%= model_class.human_attribute_name(:category_id) %></th>
+    <th><%= model_class.human_attribute_name(:description) %></th>
+    <th><%= model_class.human_attribute_name(:amount) %></th>
+    <th>Credit/Debit</th>
+    <th><%= model_class.human_attribute_name(:reconciled) %></th>
+  </tr>
+  </thead>
+<tbody>
+<%= form_tag reconcile_transactions_bulk_update_path do %>
+    <% for transaction in @transactions %>
+        <tr>
+        <%= fields_for "transactions[]", transaction do |f| %>
+              <td><%=h  f.hidden_field :id, value: transaction.id %></td>
+              <td> <%=h  User.find(transaction.user_id).name %></td>
+              <td> <%=h  transaction.tran_date %></td>
+              <td> <%=h  transaction.account_id %></td>
+              <td> <%=h  transaction.category_id %></td>
+              <td> <%=h  transaction.description %></td>
+              <td> <%=h  transaction.amount %></td>
+              <td> <%=h  transaction.sign %></td>
+              <td>  <%=h f.check_box(:reconciled, {}, checked_value = 'true', unchecked_value = 'false')%></td>
+        <% end %>
+          <tr>
+    <% end %>
+    <p><%= submit_tag "Submit" %></p>
+<% end %>
+</tbody>
+</table>

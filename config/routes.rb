@@ -7,6 +7,9 @@ BudgetPlanner::Application.routes.draw do
   match 'accounts/:id/statement', to: 'accounts#statement', as: 'account_statement', via: [:get, :post]
   resources :accounts
 
+  post '/reconcile_transactions/bulk_update', to: 'reconcile_transactions#bulk_update'
+  resources :reconcile_transactions
+
   devise_for :users
   get '/users/new_user', to: 'devise#new_user_registration'
   

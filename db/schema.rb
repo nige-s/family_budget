@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140618200144) do
+ActiveRecord::Schema.define(version: 20140626191306) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -128,6 +128,8 @@ ActiveRecord::Schema.define(version: 20140618200144) do
     t.datetime "updated_at"
     t.string   "sign"
     t.integer  "recurring_trans_id"
+    t.boolean  "reconciled",         default: false
+    t.date     "reconciled_date"
   end
 
   create_table "trantypes", force: true do |t|

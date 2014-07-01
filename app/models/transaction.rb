@@ -1,5 +1,5 @@
 class Transaction < ActiveRecord::Base
-  before_save :ensure_lowercase
+  before_save :ensure_lowercase, :set_reconciled_date
   belongs_to :account
   belongs_to :user
   belongs_to :category
@@ -31,5 +31,13 @@ class Transaction < ActiveRecord::Base
   def self.sum_transactions(transactions)
     transactions.sum(:amount)
   end
+
+  def set_reconciled_date
+    if self.reconciled && self.reconciled_date.nil?
+      self.reconciled_date = DateTime.now
+    elsif self.reconciled == false && self.reconciled_date.nil? == false
+      self.reconciled_date = nil
+    end
+end
   #paginates_per 10
 end
