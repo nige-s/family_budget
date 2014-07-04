@@ -54,7 +54,7 @@
         <td><%= transaction.sign %></td>
         <% if transaction.sign == 'credit' %>
 	<td>
-          <%= link_to t('.edit', :default => t("helpers.links.edit_deposit")),
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_deposit_transaction_path(transaction), :class => 'btn btn-mini' %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                       transaction_path(transaction),
