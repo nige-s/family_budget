@@ -1,7 +1,7 @@
 class ReconcileTransactionsController < ApplicationController
   before_action :set_reconcile_transaction, only: [:show, :edit, :update, :destroy]
   def index
-    @transactions = current_user.transactions
+    @transactions = current_user.transactions.where(reconciled: false).order('tran_date DESC')
   end
 
   def update
