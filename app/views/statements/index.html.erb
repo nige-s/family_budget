@@ -44,12 +44,13 @@
         <td><%= Category.find(transaction.category_id).name %></td>
         <td><%= number_to_currency(transaction.amount, unit: '£') %></td>
         <% if transaction.reconciled %>
-          <td><strong><%= transaction.reconciled %></strong></td>
+          <td><div class='text-center'><%= image_tag('tick.png') %></div></td>
         <%else%>
-          <td><%= transaction.reconciled %></td>
+          <td><div class='text-center'><%= image_tag('cross.png') %></div></td>
         <% end%>
 
         <td><%= transaction.reconciled_date %></td>
+
         <td><%= transaction.sign %></td>
         <% if transaction.sign == 'credit' %>
 	<td>
