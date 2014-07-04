@@ -17,8 +17,8 @@
     <th><%= model_class.human_attribute_name(:reconciled) %></th>
   </tr>
   </thead>
+  <%= form_tag reconcile_transactions_bulk_update_path do %>
 <tbody>
-<%= form_tag reconcile_transactions_bulk_update_path do %>
     <% for transaction in @transactions %>
         <tr>
         <%= fields_for "transactions[]", transaction do |f| %>
@@ -32,9 +32,14 @@
               <td> <%=h  transaction.sign %></td>
               <td>  <%=h f.check_box(:reconciled, {}, checked_value = 'true', unchecked_value = 'false')%></td>
         <% end %>
-          <tr>
+          </tr>
     <% end %>
-    <p><%= submit_tag "Submit" %></p>
-<% end %>
 </tbody>
+      <div><p><strong>Accounts</strong></p>
+        <div>
+          <%= collection_select(:account,:id, Account.user_accounts(current_user.id), :id, :name,{:include_hidden => false,:selected => params[:account_id] || 1}) %>
+        </div>
+      </div>
+      <div><p><%= submit_tag "Change Bank ", :name => 'update_bank',:class => 'btn btn-primary'%></p><p><%= submit_tag "Save Reconciled", :name => 'save', :class => 'btn btn-primary' %></p></div>
+  <% end %>
 </table>

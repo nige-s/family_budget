@@ -1,26 +1,30 @@
 class ReconcileTransactionsController < ApplicationController
   before_action :set_reconcile_transaction, only: [:show, :edit, :update, :destroy]
   def index
-    @transactions = current_user.transactions.where(reconciled: false).order('tran_date DESC')
+    acc_id = params['account_id'] || 1
+    @transactions = current_user.transactions.where(account_id: acc_id).where(reconciled: false).where("tran_date <= ?", Date.today).order('tran_date DESC')
   end
 
   def update
-    respond_to do |format|
-      if @reconcile_transaction.update(transaction_params)
-        format.html { redirect_to reconcile_transaction, notice: 'Reconcile transaction was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: reconcile_transaction.errors, status: :unprocessable_entity }
+
+      respond_to do |format|
+        if @reconcile_transaction.update(transaction_params)
+          format.html { redirect_to reconcile_transaction, notice: 'Reconcile transaction was successfully updated.' }
+          format.json { head :no_content }
+        else
+          format.html { render action: 'edit' }
+          format.json { render json: reconcile_transaction.errors, status: :unprocessable_entity }
+        end
       end
-    end
   end
 
   def bulk_update
-
+    if params[:save]
     transaction_params['transactions'].each do |tran|
       tran_for_update = Transaction.update(tran[1]['id'],reconciled: tran[1]['reconciled'])
-      require 'pry';binding.pry
+    end
+    elsif params[:update_bank]
+      redirect_to action: 'index', account_id: params['account']['id']
     end
   end
 
