@@ -1,7 +1,6 @@
 class ReconcileTransactionsController < ApplicationController
   before_action :set_reconcile_transaction, only: [:show, :edit, :update, :destroy]
   def index
-    require 'pry';binding.pry
     acc_id = params['account_id'] || 1
     @transactions = current_user.transactions.where(account_id: acc_id).where(reconciled: false).where("tran_date <= ?", Date.today).order('tran_date DESC')
   end
@@ -19,7 +18,6 @@ class ReconcileTransactionsController < ApplicationController
   end
 
   def bulk_update
-    require 'pry';binding.pry
     if params[:save]
     transaction_params['transactions'].each do |tran|
       tran_for_update = Transaction.update(tran[1]['id'],reconciled: tran[1]['reconciled'])
