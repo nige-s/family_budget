@@ -18,7 +18,7 @@ class RecurringTransaction < ActiveRecord::Base
   def self.process_weekly_recurring(account_id, end_date, start_date, user_id)
     week_day = {1 => 'monday', 2 => 'tuesday', 3 => 'wednesday', 4 => 'thursday', 5 => 'friday', 6 => 'saturday', 7 => 'sunday'}
 
-    recurring_trans = RecurringTransaction.where(active: true).where(account_id: account_id).where(interval: 'weekly').where('start_date <= ?', start_date)
+    recurring_trans = RecurringTransaction.where(active: true).where(account_id: account_id).where(interval: 'weekly').where('start_date <= ?', end_date)
     (start_date..end_date).each do |date|
       recurring_trans.each do |recurring_transaction|
         @date_until = recurring_transaction.end_date || nil
@@ -57,7 +57,7 @@ class RecurringTransaction < ActiveRecord::Base
   end
 
   def self.process_monthly_recurring(account_id, end_date, start_date, user_id)
-    recurring_trans = RecurringTransaction.where(active: true).where(account_id: account_id).where(interval: 'monthly').where('start_date <= ?', start_date)
+    recurring_trans = RecurringTransaction.where(active: true).where(account_id: account_id).where(interval: 'monthly').where('start_date <= ?', end_date)
     (start_date.month..end_date.month).each do |month|
       recurring_trans.each do |recurring_transaction|
         @date_until = recurring_transaction.end_date || nil
