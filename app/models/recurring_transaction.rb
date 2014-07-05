@@ -11,7 +11,7 @@ class RecurringTransaction < ActiveRecord::Base
     account_id = options[:account_id]
     user_id = Account.find(account_id).users.first.id
 
-    #process_monthly_recurring(account_id, end_date, start_date, user_id)
+    process_monthly_recurring(account_id, end_date, start_date, user_id)
     process_weekly_recurring(account_id, end_date, start_date, user_id)
   end
 
