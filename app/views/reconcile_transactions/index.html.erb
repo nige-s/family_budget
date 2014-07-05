@@ -24,7 +24,7 @@
         <%= fields_for "transactions[]", transaction do |f| %>
               <td><%=h  f.hidden_field :id, value: transaction.id %></td>
               <td> <%=h  User.find(transaction.user_id).name %></td>
-              <td> <%=h  transaction.tran_date %></td>
+              <td> <%=h  transaction.tran_date.to_formatted_s(:d_m_Y) %></td>
               <td> <%=h  transaction.account_id %></td>
               <td> <%=h  transaction.category_id %></td>
               <td> <%=h  transaction.description %></td>

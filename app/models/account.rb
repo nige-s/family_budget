@@ -12,7 +12,7 @@ class Account < ActiveRecord::Base
     ah.each do |acc|
       accounts << Account.find(acc.account_id)
     end
-    accounts
+    accounts.sort_by{|e| e[:id]}
   end
 
   def self.owns_account?(user_id,account_id)

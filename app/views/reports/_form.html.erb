@@ -16,7 +16,7 @@
 
       <div class="col-xs-6 col-sm-3 placeholder"><p><strong>Categories</strong></p>
          <% @acc_count = Account.user_accounts(current_user.id).count %>
-        <%= f.collection_select(:category_id, Category.user_categories(current_user.id), :id, :name,{:include_hidden => false},{:multiple => true, size: @acc_count}) %>
+        <%= f.collection_select(:category_id, Category.user_categories(current_user.id), :id, :name,{:include_hidden => false},{:multiple => true, size: 15}) %>
       </div>
       <div class="col-xs-6 col-sm-2 placeholder"><p><strong>Accounts</strong></p>
         <div>

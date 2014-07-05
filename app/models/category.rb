@@ -5,9 +5,9 @@ class Category < ActiveRecord::Base
 	validates_presence_of :user_id
 	def self.user_categories(user_id)
       if(user_id == 1 || user_id == 2)
-		Category.where(user_id: [1, 2])
+		Category.where(user_id: [1, 2]).order(:name)
 	  else
-	  	Category.where(user_id: user_id)
-	  end
+	  	Category.where(user_id: user_id).order(:name)
+    end
 	end
 end
