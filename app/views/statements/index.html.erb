@@ -49,7 +49,7 @@
           <td><div class='text-center'><%= image_tag('cross.png') %></div></td>
         <% end%>
 
-        <td><%= transaction.reconciled_date %></td>
+        <td><%= transaction.reconciled_date.to_formatted_s(:d_m_Y) unless transaction.reconciled_date.nil?  %></td>
 
         <td><%= transaction.sign %></td>
         <% if transaction.sign == 'credit' %>
