@@ -7,7 +7,7 @@
 <%= form_for @account, :url => account_statement_path(), :html => { :class => 'form-horizontal' }, method: :post do |f| %>
   <div class="control-group">
     <div class="controls">
-	  <%= f.collection_select(:id, Account.all, :id, :name, :include_blank => 'Select an Account') %> 
+	  <%= f.collection_select(:id, current_user.accounts, :id, :name, :include_blank => 'Select an Account') %>
   </div>
 </div>
 <div class="form-actions">

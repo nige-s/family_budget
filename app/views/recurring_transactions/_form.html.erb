@@ -2,7 +2,7 @@
   <div class="control-group">
     <%= f.label :account_id, :class => 'control-label' %>
     <div class="controls">
-	    <%= f.collection_select( :account_id, Account.all,:id, :name, :include_blank => 'Select Account') %>
+	    <%= f.collection_select( :account_id, current_user.accounts,:id, :name, :include_blank => 'Select Account') %>
     </div>
   </div>
   <div class="control-group">
