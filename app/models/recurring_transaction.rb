@@ -39,7 +39,8 @@ class RecurringTransaction < ActiveRecord::Base
           create_tran = true
         end
 
-        if (create_tran && weekly_recurring_transaction_exists(recurring_transaction.id, date) == false && (@date_until.nil? || @date_until >= end_date) && recurring_transaction.start_date <= date)
+        if (create_tran && weekly_recurring_transaction_exists(recurring_transaction.id, date) == false)
+        if (@date_until.nil? || @date_until >= end_date) && recurring_transaction.start_date <= date
 
           Transaction.create(account_id: recurring_transaction.account_id,
                              user_id: user_id,
@@ -51,6 +52,7 @@ class RecurringTransaction < ActiveRecord::Base
                              recurring_trans_id: recurring_transaction.id)
           recurring_transaction.last_updated = Date.today
           recurring_transaction.save
+          end
         end
       end
    end
@@ -66,7 +68,9 @@ class RecurringTransaction < ActiveRecord::Base
         rescue
           puts "INVALID DATE: #{recurring_transaction.day}/#{month}/#{start_date.year}"
         end
-        if (monthly_recurring_transaction_exists(recurring_transaction.id, month, start_date.year) == false && (@date_until.nil? || @date_until >= end_date) && recurring_transaction.start_date <= @curr_date)
+        if (monthly_recurring_transaction_exists(recurring_transaction.id, month, start_date.year) == false)
+          if (@date_until.nil? || @date_until >= end_date)
+            if recurring_transaction.start_date <= @curr_date
 
           Transaction.create(account_id: recurring_transaction.account_id,
                              user_id: user_id,
@@ -78,6 +82,8 @@ class RecurringTransaction < ActiveRecord::Base
                              recurring_trans_id: recurring_transaction.id)
           recurring_transaction.last_updated = Date.today
           recurring_transaction.save
+              end
+            end
         end
       end
     end
