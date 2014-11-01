@@ -5,13 +5,13 @@ class RecurringTransactionsController < ApplicationController
   # GET /recurring_transactions.json
   def index
     accounts = current_user.accounts
-    @recurring_transactions = RecurringTransaction.where(account_id: accounts)
+    @recurring_transactions = RecurringTransaction.where(account_id: accounts).where(active: true)
     @title = "Total outgoings"
     @total = 0
     @tran_count = 0
     accounts.each do |acc|
-      @total  = @total + acc.recurring_transactions.where(sign: 'debit').sum(:amount)
-      @tran_count = @tran_count + acc.recurring_transactions.where(sign: 'debit').count
+      @total  = @total + acc.recurring_transactions.where(sign: 'debit').where(active: true).sum(:amount)
+      @tran_count = @tran_count + acc.recurring_transactions.where(sign: 'debit').where(active: true).count
     end
 
 
