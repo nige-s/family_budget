@@ -13,8 +13,7 @@ class RecurringTransactionsController < ApplicationController
       @total  = @total + acc.recurring_transactions.where(sign: 'debit').where(active: true).sum(:amount)
       @tran_count = @tran_count + acc.recurring_transactions.where(sign: 'debit').where(active: true).count
     end
-
-
+    @recurring_transactions = @recurring_transactions.order('day ASC')
   end
 
   # GET /recurring_transactions/1
