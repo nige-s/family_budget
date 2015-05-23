@@ -32,7 +32,7 @@
           <ul class="nav navbar-nav navbar-right">
             <% unless user_signed_in? %>
                 <li><%= link_to "Sign up", new_user_registration_path %> </li>
-                <li><%= link_to "Login", new_user_session_path  %></li>             
+                <li><%= link_to "Login", new_user_session_path  %></li>
              <% end %>
           </ul>
         </div>
@@ -46,7 +46,7 @@
           <ul class="nav nav-sidebar">
             <li class="active"><a href="#">Transactions</a></li>
              <li><%= content_for :total %><%= bootstrap_flash %></li>
-           
+
               <li><%= link_to "All Transactions", transactions_path %></li>
               <li><%= link_to 'Filter Transactions',reports_path %></li>
               <li><%= link_to 'Transaction Summary',reports_summary_path %></li>
@@ -61,13 +61,13 @@
               <li><%= link_to 'Make a Deposit', transactions_deposit_path %></li>
               <li><%= link_to 'Statements', statements_path('statement' => {:acc_id => Account.first.id}) %></li>
               <% end %>
-              
+
           </ul>
           <ul class="nav nav-sidebar">
             <li class="active"><a href="#">Reccurring Transactions</a></li>
         <li><%= link_to 'Recurring transactions', recurring_transactions_path %></li>
               <li><%= link_to 'New Recurring transaction', new_recurring_transaction_path %></li>
-           
+
           </ul>
         </div>
   <% end %>

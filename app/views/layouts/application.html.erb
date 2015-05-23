@@ -57,7 +57,7 @@
               <% else %>
                 <li><%= link_to "Sign up", new_user_registration_path %> </li>
                 <li><%= link_to "Login", new_user_session_path  %></li>
-             
+
              <% end %>
           </ul>
           <form class="navbar-form navbar-right">
@@ -73,7 +73,7 @@
           <ul class="nav nav-sidebar">
             <li class="active"><a href="#">Transactions</a></li>
              <li><%= content_for :total %></li>
-           
+
               <li><%= link_to "All Transactions", transactions_path %></li>
               <li><%= link_to 'Filter Transactions',reports_path %></li>
               <li><%= link_to 'Transaction Summary',reports_summary_path %></li>
@@ -90,19 +90,19 @@
               <li><%= link_to 'Statements', statements_path('statement' => {:acc_id => User.find(current_user.id).accounts.first.id}) %></li>
             <% end %>
        <% end %>
-              
+
           </ul>
           <ul class="nav nav-sidebar">
             <li class="active"><a href="#">Reccurring Transactions</a></li>
         <li><%= link_to 'Recurring transactions', recurring_transactions_path %></li>
               <li><%= link_to 'New Recurring transaction', new_recurring_transaction_path %></li>
-           
+
           </ul>
           <ul class="nav nav-sidebar">
             <li class="active"><a href="#">Account Transfer</a></li>
         <li><%= link_to 'Account Transfers', bank_transfers_path %></li>
               <li><%= link_to 'New Account Transfer', new_bank_transfer_path %></li>
-           
+
           </ul>
           <ul class="nav nav-sidebar">
             <li class="active"><a href="#">Reconcile Transactions</a></li>
