@@ -40,6 +40,7 @@
 <div class="wrapper">
 
         <div class="row row-offcanvas row-offcanvas-left">
+          <% if user_signed_in? %>
             <!-- sidebar -->
             <div class="column col-xs-1 col-sm-2 sidebar-offcanvas" id="sidebar">
               <div class="box">
@@ -175,6 +176,7 @@
 
             </div>
         </div>
+              <% end %>
             <!-- /sidebar -->
           
             <!-- main right col -->
