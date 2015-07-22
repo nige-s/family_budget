@@ -21,20 +21,21 @@
  * Base structure
  */
 
-.welcome_container{
-  color: #000000;
-  //color: #fff;
-  text-align: center;
-  text-shadow: 0 1px 3px rgba(0,0,0,.5);
-  box-shadow: inset 0 0 100px rgba(0,0,0,.5);
-  height: 100%;
-  //background-image: image-url('finance-planning.png');
-  //background-image: image-url('financen.jpg');
-  //background-image: image-url('walking_in_field.jpg');
-  background-image: image-url('budget.jpg');
-  background-size: cover;
+@media only screen and (max-width: 775px) {
+  .welcome_container{
+    color: #000000;
+    //color: #fff;
+    text-align: center;
+    text-shadow: 0 1px 3px rgba(0,0,0,.5);
+    box-shadow: inset 0 0 100px rgba(0,0,0,.5);
+    height: 100%;
+    //background-image: image-url('finance-planning.png');
+    //background-image: image-url('financen.jpg');
+    //background-image: image-url('walking_in_field.jpg');
+    background-image: image-url('budget.jpg');
+    background-size: cover;
+  }
 }
-
 /* Extra markup and styles for table-esque vertical and horizontal centering */
 .site-wrapper {
   display: table;

@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!, :get_params
-
+  include BootstrapFlashHelper
   def get_params
     @controller_from_appc = params[:controller]
     @action_from_appc = params[:action]
