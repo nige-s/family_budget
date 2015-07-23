@@ -54,7 +54,7 @@
                         <i class="glyphicon glyphicon-gbp"></i> Transactions
                     <% end %>
                   </li>
-
+                  <li><%= content_for :total %></li>
                   <li><%= link_to reports_path do %>
                         <i class="glyphicon glyphicon-filter"></i> Filter
                     <% end %>
@@ -178,10 +178,10 @@
         </div>
               <% end %>
             <!-- /sidebar -->
-          
+
             <!-- main right col -->
             <div class="column col-sm-10 col-xs-11" id="main">
-                
+
                 <!-- top nav -->
               <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
                 <div class="container-fluid">
@@ -216,10 +216,10 @@
                 </div>
               </div>
                 <!-- /top nav -->
-              
+
             <!-- /main -->
               <%= bootstrap_flash %>
-            <%= yield %>          
+            <%= yield %>
         </div>
         </div>
 
