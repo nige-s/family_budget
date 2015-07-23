@@ -22,14 +22,11 @@
 <table class="table table-striped">
   <thead>
     <tr>
-       <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:account_id) %></th>
+      <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:tran_date) %></th>
       <th><%= model_class.human_attribute_name(:description) %></th>
-      <th><%= model_class.human_attribute_name(:category_id) %></th>
       <th><%= model_class.human_attribute_name(:amount) %></th>
       <th><%= model_class.human_attribute_name(:reconciled) %></th>
-      <th><%= model_class.human_attribute_name(:reconciled_date) %></th>
       <th><%= "Credit/Debit" %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
@@ -38,19 +35,14 @@
     <% @acc_transactions.each  do |transaction| %>
       <tr>
         <td><%= link_to transaction.id, transaction_path(transaction.id) %></td>
-        <td><%= Account.find(transaction.account_id).name %></td>
         <td><%= transaction.tran_date.to_formatted_s(:d_m_Y) %></td>
         <td><%= transaction.description %></td>
-        <td><%= Category.find(transaction.category_id).name %></td>
         <td><%= number_to_currency(transaction.amount, unit: '£') %></td>
         <% if transaction.reconciled %>
           <td><div class='text-center'><%= image_tag('tick.png') %></div></td>
         <%else%>
           <td><div class='text-center'><%= image_tag('cross.png') %></div></td>
         <% end%>
-
-        <td><%= transaction.reconciled_date.to_formatted_s(:d_m_Y) unless transaction.reconciled_date.nil?  %></td>
-
         <td><%= transaction.sign %></td>
         <% if transaction.sign == 'credit' %>
 	<td>
