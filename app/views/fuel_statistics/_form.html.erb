@@ -1,0 +1,82 @@
+<%= form_for @transaction,:url => url_for(:controller => 'fuel_statistics', :action => 'create'), :html => { :class => 'form-horizontal' } do |f| %>
+  <% if @transaction.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@transaction.errors.count, "error") %> prohibited this transaction from being saved:</h2>
+
+      <ul>
+      <% @transaction.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <% if (current_user.id == 1 || current_user.id == 2) %>
+    <% @transaction.user_id ||= 1 %>
+     <div class="control-group">
+     <%= f.label "User", :class => 'control-label' %>
+     <div class="controls">
+    <%= f.collection_select(:user_id, User.all, :id, :name,:include_blank => 'Select a user') %>
+     </div>
+   </div>
+  <% else %>
+    <%= f.hidden_field :user_id, :value => @transaction.user_id || params[:transaction][:user_id] %> 
+  <% end %>
+ 
+ <%= f.hidden_field :sign, :value => @transaction.sign || params[:sign]  %>
+ <%= f.hidden_field :mileage, :value => @last_mileage %>
+
+     <div class="control-group">
+    <%= f.label :tran_date, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.date_select :tran_date %>
+    </div>
+   </div>
+   <div class="control-group">
+     <%= f.label "Account", :class => 'control-label' %>
+     <div class="controls">
+       <%= f.collection_select(:account_id, Account.user_accounts(current_user.id), :id, :name,:include_blank => 'Select an Account') %>
+     </div>
+   </div>
+   <div class="control-group">
+     <%= label_tag 'Reg Number' %>
+     <div class="controls">
+       <%= text_field_tag :reg_number %>
+     </div>
+</div>
+   <div class="control-group">
+     <%= label_tag 'Price per litre' %>
+     <div class="controls">
+       <%= text_field_tag :price_litre %>
+     </div>
+</div>
+<% if params[:type] == "user" %>
+   <div class="control-group">
+    <%= f.label 'Mileage', :class => 'control-label' %>
+    <div class="controls">
+    <%= f.text_field :supplier %>
+  </div>
+</div>
+<% end %>
+  <div class="control-group">
+    <%= f.label :amount, :class => 'control-label' %>
+    <div class="controls">
+    <%= f.text_field :amount %>
+  </div>
+</div>
+  <div class="control-group">
+    <%= label_tag 'Mpg' %>
+    <div class="controls">
+    <%= text_field_tag :mpg %>
+  </div>
+</div>
+ <div class="form-actions">
+    <%= f.submit :class => 'btn btn-primary' %>
+  </div>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                transactions_path, :class => 'btn' %>
+<% end %>
+
+
+
+
+

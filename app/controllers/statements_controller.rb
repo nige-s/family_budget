@@ -4,15 +4,15 @@ class StatementsController < ApplicationController
   # GET /statements
   # GET /statements.json
   def index
-      @statement = Statement.new(statement_params)
-      begin
+    @statement = Statement.new(statement_params)
+    begin
       @acc_transactions = current_user.accounts.find(@statement.acc_id).transactions.where("tran_date <= ?", @statement.edate).order('tran_date DESC')
       @acc_balance = Statement.account_balance(@statement)
       @balance = @acc_balance[:start_balance] + (@acc_balance[:credits] - @acc_balance[:debits])
-      rescue
-        flash[:error] = "Not authourised to view the account you attempted to access"
-        redirect_to transactions_path 
-      end
+    rescue
+      flash[:error] = "Not authourised to view the account you attempted to access"
+      redirect_to transactions_path 
+    end
   end
 
   # GET /statements/1

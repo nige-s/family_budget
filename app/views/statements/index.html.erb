@@ -3,19 +3,14 @@
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
 </div>
 
-<%= form_for @statement, method: :get, :html => { :class => 'form-horizontal' } do |f| %>
-  <div class="control-group">
-    <div class="controls">
-    <%= f.collection_select(:acc_id, Account.user_accounts(current_user.id), :id, :name, :include_blank => 'Select an Account') %> 
+<%= bootstrap_form_for @statement,layout: :inline, method: :get do |f| %>
+  <div class='col-lg-3'>
+    <%= f.collection_select(:acc_id, Account.user_accounts(current_user.id), :id, :name, :include_blank => 'Select an Account', hide_label: true) %> 
   </div>
-</div>
-<div class="control-group">
-    <%= f.label "Forecast", :class => 'control-label' %>
-    <div class="controls">
-      <%= f.date_select :edate %>
-    </div>
+  <div class='col-lg-3'>
+    <%= f.date_select :edate, hide_label: true %>
   </div>
-<div class="form-actions">
+  <div class='col-lg-5'>
     <%= f.submit 'Create Statement', :class => 'btn btn-primary' %>   
   </div>
 <% end %> 
@@ -32,7 +27,7 @@
     </tr>
   </thead>
   <tbody>
-    <% @acc_transactions.each  do |transaction| %>
+    <% @acc_transactions.order("tran_date desc").limit(150).each  do |transaction| %>
       <tr>
         <td><%= link_to transaction.id, transaction_path(transaction.id) %></td>
         <td><%= transaction.tran_date.to_formatted_s(:d_m_Y) %></td>
