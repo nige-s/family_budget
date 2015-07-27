@@ -32,7 +32,7 @@
   </tbody>
 </table>
 
-<%= paginate @transactions, :params => {:total_s => @total_spent} %>
-
+<%= paginate @transactions, :params => {:total_s => @total} %>
+<% render 'partials/total', :params => {:total_s =>  @total} %>
 <% link_to t('.new', :default => t("helpers.links.new")), new_transaction_path, :class => 'btn btn-primary' %>
 
