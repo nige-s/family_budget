@@ -19,7 +19,7 @@ BudgetPlanner::Application.routes.draw do
   get 'transactions/:id/edit_deposit', to: 'transactions#edit_deposit', as: 'edit_deposit_transaction'
   get '/transactions/deposit'
   resources :transactions 
-
+  resources :fuel_statistics, only: [:index, :new, :create]
   get '/reports/summary'
   get 'reports/reset'
   resources :reports, only: [:index]

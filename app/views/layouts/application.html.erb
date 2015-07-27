@@ -37,193 +37,203 @@
     <%= javascript_include_tag "application" %>
   </head>
   <body>
-<div class="wrapper">
+    <div class="wrapper">
 
-        <div class="row row-offcanvas row-offcanvas-left">
-          <% if user_signed_in? %>
-            <!-- sidebar -->
-            <div class="column col-xs-1 col-sm-2 sidebar-offcanvas" id="sidebar">
-              <div class="box">
-                <ul class="nav">
+      <div class="row row-offcanvas row-offcanvas-left">
+        <% if user_signed_in? %>
+          <!-- sidebar -->
+          <div class="column col-xs-1 col-sm-2 sidebar-offcanvas" id="sidebar">
+            <div class="box">
+              <ul class="nav">
                 <li><a href="#" data-toggle="offcanvas" class="visible-xs text-center"><i class="glyphicon glyphicon-chevron-right"></i></a></li>
               </ul>
 
-                <ul class="nav hidden-xs" id="lg-menu">
+              <ul class="nav hidden-xs" id="lg-menu">
 
-                  <li><%= link_to transactions_path do %>
-                        <i class="glyphicon glyphicon-gbp"></i> Transactions
-                    <% end %>
-                  </li>
-                  <li><%= content_for :total %></li>
-                  <li><%= link_to reports_path do %>
-                        <i class="glyphicon glyphicon-filter"></i> Filter
-                    <% end %>
-                  </li>
-                  <li><%= link_to reports_summary_path do%>
-                        <i class="glyphicon glyphicon-signal"></i> Summary
-                    <% end %>
-                  </li>
-                  <li><%= link_to new_transaction_path do%>
-                        <i class="glyphicon glyphicon-plus"></i> New
-                    <% end %>
-                  </li>
-                  <li><%= link_to categories_path do%>
-                    <i class="glyphicon glyphicon-bullhorn"></i> Categories
-                    <% end %>
-                  </li>
+                <li><%= link_to transactions_path do %>
+                  <i class="glyphicon glyphicon-gbp"></i> Transactions
+                <% end %>
+                </li>
+                <li><%= content_for :total %></li>
+                <li><%= link_to fuel_statistics_path do %>
+                  <i class="glyphicon glyphicon-hand-right"></i> Fuel
+                <% end %>
+                </li>
+                <li><%= link_to new_fuel_statistic_path do %>
+                  <i class="glyphicon glyphicon-plus"></i> Fuel
+                <% end %>
+                </li>
+                <li><%= link_to reports_path do %>
+                  <i class="glyphicon glyphicon-filter"></i> Filter
+                <% end %>
+                </li>
+                <li><%= link_to reports_summary_path do%>
+                  <i class="glyphicon glyphicon-signal"></i> Summary
+                <% end %>
+                </li>
+                <li><%= link_to new_transaction_path do%>
+                  <i class="glyphicon glyphicon-plus"></i> New
+                <% end %>
+                </li>
+                <li><%= link_to categories_path do%>
+                  <i class="glyphicon glyphicon-bullhorn"></i> Categories
+                <% end %>
+                </li>
 
-                      <li><%= link_to accounts_path do %>
-                            <i class="glyphicon glyphicon-briefcase"></i> Accounts
-                        <% end %>
-                      </li>
+                <li><%= link_to accounts_path do %>
+                  <i class="glyphicon glyphicon-briefcase"></i> Accounts
+                <% end %>
+                </li>
 
-                      <li><%= link_to new_account_path do %>
-                            <i class="glyphicon glyphicon-plus"></i> New
-                        <% end %>
-                      </li>
-                        <% if Account.count > 0 %>
-                      <li><%= link_to transactions_deposit_path do%>
-                            <i class="glyphicon glyphicon-ok"></i> Deposit
-                        <% end %>
-                      </li>
-                            <% if User.find(current_user.id).accounts.size > 0 %>
-                      <li><%= link_to statements_path('statement' => {:acc_id => User.find(current_user.id).accounts.first.id})  do%>
-                            <i class="glyphicon glyphicon-file"></i> Statement
-                        <% end %>
-                      </li>
-                            <% end %>
-                        <% end %>
-
-                  <li><%= link_to recurring_transactions_path do %>
-                        <i class="glyphicon glyphicon-refresh"></i> Recurring
-                    <% end %>
+                <li><%= link_to new_account_path do %>
+                  <i class="glyphicon glyphicon-plus"></i> New
+                <% end %>
+                </li>
+                <% if Account.count > 0 %>
+                  <li><%= link_to transactions_deposit_path do%>
+                    <i class="glyphicon glyphicon-ok"></i> Deposit
+                  <% end %>
                   </li>
-
-                  <li><%= link_to new_recurring_transaction_path do %>
-                        <i class="glyphicon glyphicon-plus"></i> New
+                  <% if User.find(current_user.id).accounts.size > 0 %>
+                    <li><%= link_to statements_path('statement' => {:acc_id => User.find(current_user.id).accounts.first.id})  do%>
+                      <i class="glyphicon glyphicon-file"></i> Statement
                     <% end %>
-                  </li>
+                    </li>
+                  <% end %>
+                <% end %>
 
-                  <li><%= link_to bank_transfers_path do %>
-                        <i class="glyphicon glyphicon-transfer"></i> Transfers
-                    <% end %>
-                  </li>
+                <li><%= link_to recurring_transactions_path do %>
+                  <i class="glyphicon glyphicon-refresh"></i> Recurring
+                <% end %>
+                </li>
 
-                  <li><%= link_to new_bank_transfer_path do %>
-                        <i class="glyphicon glyphicon-plus"></i> New
-                    <% end %>
-                  </li>
+                <li><%= link_to new_recurring_transaction_path do %>
+                  <i class="glyphicon glyphicon-plus"></i> New
+                <% end %>
+                </li>
 
-                  <li><%= link_to reconcile_transactions_path do %>
-                        <i class="glyphicon glyphicon-subtitles"></i> Reconcile
-                    <% end %>
-                  </li>
-                </ul>
+                <li><%= link_to bank_transfers_path do %>
+                  <i class="glyphicon glyphicon-transfer"></i> Transfers
+                <% end %>
+                </li>
 
-                <!--<ul class="list-unstyled hidden-xs" id="sidebar-footer">-->
-                    <!--<li>-->
-                      <!--<a href="http://www.bootply.com"><h3>Bootstrap</h3> <i class="glyphicon glyphicon-heart-empty"></i> Bootply</a>-->
-                    <!--</li>-->
+                <li><%= link_to new_bank_transfer_path do %>
+                  <i class="glyphicon glyphicon-plus"></i> New
+                <% end %>
+                </li>
+
+                <li><%= link_to reconcile_transactions_path do %>
+                  <i class="glyphicon glyphicon-subtitles"></i> Reconcile
+                <% end %>
+                </li>
+              </ul>
+
+              <!--<ul class="list-unstyled hidden-xs" id="sidebar-footer">-->
+                <!--<li>-->
+                <!--<a href="http://www.bootply.com"><h3>Bootstrap</h3> <i class="glyphicon glyphicon-heart-empty"></i> Bootply</a>-->
+                <!--</li>-->
                 <!--</ul>-->
 
-                <!-- tiny only nav-->
+              <!-- tiny only nav-->
               <ul class="nav visible-xs" id="xs-menu">
 
                 <li><%= link_to transactions_path,{ :class=>"text-center" } do %>
-                      <i class="glyphicon glyphicon-gbp"></i>
-                  <% end %>
+                  <i class="glyphicon glyphicon-gbp"></i>
+                <% end %>
+                </li>
+                <li><%= link_to new_transaction_path,{ :class=>"text-center" } do%>
+                  <i class="glyphicon glyphicon-plus  "></i>
+                <% end %>
+                </li>
+                <li><%= link_to fuel_statistics_path ,{ :class=>"text-center" } do %>
+                  <i class="glyphicon glyphicon-hand-right"></i>
+                <% end %>
+                </li>
+                <li><%= link_to new_fuel_statistic_path ,{ :class=>"text-center" } do %>
+                  <i class="glyphicon glyphicon-plus"></i>
+                <% end %>
                 </li>
 
                 <li><%= link_to reports_path,{ :class=>"text-center" } do %>
-                      <i class="glyphicon glyphicon-filter"></i>
-                  <% end %>
+                  <i class="glyphicon glyphicon-filter"></i>
+                <% end %>
                 </li>
                 <li><%= link_to reports_summary_path,{ :class=>"text-center" } do%>
-                      <i class="glyphicon glyphicon-signal"></i>
-                  <% end %>
-                </li>
-                <li><%= link_to new_transaction_path,{ :class=>"text-center" } do%>
-                      <i class="glyphicon glyphicon-save "></i>
-                  <% end %>
+                  <i class="glyphicon glyphicon-signal"></i>
+                <% end %>
                 </li>
                 <li><%= link_to  categories_path,{ :class=>"text-center" } do%>
-                      <i class="glyphicon glyphicon-bullhorn"></i>
-                  <% end %>
+                  <i class="glyphicon glyphicon-bullhorn"></i>
+                <% end %>
                 </li>
-
-                <!--<li><a href="#featured" class="text-center"><i class="glyphicon glyphicon-list-alt"></i></a></li>-->
-                    <!--<li><a href="#stories" class="text-center"><i class="glyphicon glyphicon-list"></i></a></li>-->
-                    <!--<li><a href="#" class="text-center"><i class="glyphicon glyphicon-paperclip"></i></a></li>-->
-                    <!--<li><a href="#" class="text-center"><i class="glyphicon glyphicon-refresh"></i></a></li>-->
-
-                  <% if Account.count > 0 %>
-                      <li><%= link_to transactions_deposit_path,{ :class=>"text-center" } do%>
-                            <i class="glyphicon glyphicon-ok"></i>
-                        <% end %>
-                      </li>
-                      <% if User.find(current_user.id).accounts.size > 0 %>
-                          <li><%= link_to statements_path('statement' => {:acc_id => User.find(current_user.id).accounts.first.id}),{ :class=>"text-center" }   do%>
-                                <i class="glyphicon glyphicon-file"></i>
-                            <% end %>
-                          </li>
-                      <% end %>
+                <% if Account.count > 0 %>
+                  <li><%= link_to transactions_deposit_path,{ :class=>"text-center" } do%>
+                    <i class="glyphicon glyphicon-ok"></i>
                   <% end %>
-                    <li><%= link_to new_bank_transfer_path,{ :class=>"text-center" } do %>
-                          <i class="glyphicon glyphicon-plus"></i>
-                      <% end %>
+                  </li>
+                  <% if User.find(current_user.id).accounts.size > 0 %>
+                    <li><%= link_to statements_path('statement' => {:acc_id => User.find(current_user.id).accounts.first.id}),{ :class=>"text-center" }   do%>
+                      <i class="glyphicon glyphicon-file"></i>
+                    <% end %>
                     </li>
-                </ul>
+                  <% end %>
+                <% end %>
+                <li><%= link_to new_bank_transfer_path,{ :class=>"text-center" } do %>
+                  <i class="glyphicon glyphicon-plus"></i>
+                <% end %>
+                </li>
+              </ul>
 
             </div>
-        </div>
-              <% end %>
-            <!-- /sidebar -->
+          </div>
+        <% end %>
+        <!-- /sidebar -->
 
-            <!-- main right col -->
-            <div class="column col-sm-10 col-xs-11" id="main">
+        <!-- main right col -->
+        <div class="column col-sm-10 col-xs-11" id="main">
 
-                <!-- top nav -->
-              <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-                <div class="container-fluid">
-                  <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                      <span class="sr-only">Toggle navigation</span>
-                      <span class="icon-bar"></span>
-                      <span class="icon-bar"></span>
-                      <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#">Budget Planner</a>
-                  </div>
-                  <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                      <% if user_signed_in? %>
-                          <li><%= link_to  edit_user_registration_path do %>
-                            <i class="glyphicon glyphicon-user"></i><%= " " + current_user.name if current_user %>
-                            <% end %>
-                          </li>
-
-                          <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
-                      <% else %>
-                          <li><%= link_to "Sign up", new_user_registration_path %> </li>
-                          <li><%= link_to "Login", new_user_session_path  %></li>
-
-                      <% end %>
-                    </ul>
-                    <!--<form class="navbar-form navbar-right">-->
-                      <!--<input type="text" class="form-control" placeholder="Search...">-->
-                    <!--</form>-->
-                  </div>
-                </div>
+          <!-- top nav -->
+          <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container-fluid">
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Budget Planner</a>
               </div>
-                <!-- /top nav -->
+              <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                  <% if user_signed_in? %>
+                    <li><%= link_to  edit_user_registration_path do %>
+                      <i class="glyphicon glyphicon-user"></i><%= " " + current_user.name if current_user %>
+                    <% end %>
+                    </li>
 
-            <!-- /main -->
-              <%= bootstrap_flash %>
-            <%= yield %>
-        </div>
-        </div>
+                    <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
+                  <% else %>
+                    <li><%= link_to "Sign up", new_user_registration_path %> </li>
+                    <li><%= link_to "Login", new_user_session_path  %></li>
 
-</div>
+                  <% end %>
+                </ul>
+                <!--<form class="navbar-form navbar-right">-->
+                  <!--<input type="text" class="form-control" placeholder="Search...">-->
+                  <!--</form>-->
+              </div>
+            </div>
+          </div>
+          <!-- /top nav -->
+
+          <!-- /main -->
+          <%= bootstrap_flash %>
+          <%= yield %>
+        </div>
+      </div>
+
+    </div>
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
