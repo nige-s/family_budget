@@ -54,6 +54,10 @@
                   <i class="glyphicon glyphicon-gbp"></i> Transactions
                 <% end %>
                 </li>
+                <li><%= link_to new_transaction_path do%>
+                  <i class="glyphicon glyphicon-plus"></i> New
+                <% end %>
+                </li>
                 <li><%= content_for :total %></li>
                 <li><%= link_to fuel_statistics_path do %>
                   <i class="glyphicon glyphicon-hand-right"></i> Fuel
@@ -69,10 +73,6 @@
                 </li>
                 <li><%= link_to reports_summary_path do%>
                   <i class="glyphicon glyphicon-signal"></i> Summary
-                <% end %>
-                </li>
-                <li><%= link_to new_transaction_path do%>
-                  <i class="glyphicon glyphicon-plus"></i> New
                 <% end %>
                 </li>
                 <li><%= link_to categories_path do%>
@@ -128,12 +128,6 @@
                 </li>
               </ul>
 
-              <!--<ul class="list-unstyled hidden-xs" id="sidebar-footer">-->
-                <!--<li>-->
-                <!--<a href="http://www.bootply.com"><h3>Bootstrap</h3> <i class="glyphicon glyphicon-heart-empty"></i> Bootply</a>-->
-                <!--</li>-->
-                <!--</ul>-->
-
               <!-- tiny only nav-->
               <ul class="nav visible-xs" id="xs-menu">
 
@@ -183,10 +177,10 @@
                 <% end %>
                 </li>
               </ul>
-
             </div>
           </div>
         <% end %>
+
         <!-- /sidebar -->
 
         <!-- main right col -->
