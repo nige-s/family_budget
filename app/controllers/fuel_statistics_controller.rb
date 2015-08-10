@@ -23,7 +23,7 @@ class FuelStatisticsController < ApplicationController
   def new
     @transaction = Transaction.new
     @transaction.user_id = current_user.id
-    last = Transaction.where(category_id: 2).where('description LIKE ?','fuel [%').where('description LIKE ?', '%px04ytm').order("supplier DESC")
+    last = Transaction.where(category_id: 2).where('description LIKE ?','fuel [%').where('description LIKE ?', '%px04ytm').order("tran_date DESC")
     if last.any?
       mileage = last.first.description.split(' ')
       mileage = mileage[2].gsub(']', '')
