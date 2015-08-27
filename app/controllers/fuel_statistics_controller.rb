@@ -74,7 +74,7 @@ class FuelStatisticsController < ApplicationController
     transaction.sign = transaction_params[:sign]
     transaction.tran_date = Date.new transaction_params["tran_date(1i)"].to_i, transaction_params["tran_date(2i)"].to_i, transaction_params["tran_date(3i)"].to_i
     mpg = params[:mpg].to_d.round(0).to_i
-    transaction.description = "fuel [#{params[:price_litre]} #{transaction_params[:mileage]}] mpg:#{mpg} #{params[:reg_number]}"
+    transaction.description = "fuel [#{params[:price_litre]} #{transaction_params[:supplier]}] mpg:#{mpg} #{params[:reg_number]}"
     transaction
   end
 end
